@@ -1,4 +1,3 @@
-# GCES-Linux-Community
 ## WorkShop Materials
 |  <pre>                 Table of Contents                      </pre>| 
 | :---                                                                |
