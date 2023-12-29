@@ -1,0 +1,73 @@
+#+DATE: 2023-12-28 Thu
+#+AUTHOR: GCES Linux Community
+#+TITLE: Day 1
+#+CREATOR: GCES Linux Community
+#+LANGUAGE: en
+
+* Day 1: Theory and History
+** Free and Open Source:
+Free and Open Source refers to software that is not only available for free but also provides access to its source code. Users can view, modify, and distribute the code, fostering a collaborative and transparent approach to software development.
+
+** Richard Stallman:
+Richard Stallman is the founder of the Free Software Foundation and a prominent figure in the free software movement. His advocacy revolves around the importance of users' freedom to control and modify the software they use.
+   [[file:./RichardStallman.jpg]]
+
+** GNU and GNU Utilities:
+GNU is a project initiated by Richard Stallman to develop a Unix-like operating system composed entirely of free software. GNU Utilities are essential tools developed as part of this project, contributing to the creation of a complete operating system.
+
+** Released under GPL License:
+The GPL (General Public License) is a widely used open-source software license. Software released under the GPL allows users to freely use, modify, and distribute the code, ensuring that derivative works also remain open source.
+
+** GNU - GNU is Not Unix:
+GNU is a recursive acronym emphasizing the project's goal of creating a Unix-like system. This reflects the project's philosophy of providing a free alternative to the Unix operating system.
+
+** First Release: 10,239 Lines of Code:
+The first release of the Linux kernel, version 0.01, consisted of 10,239 lines of code. This modest beginning laid the foundation for the growth of the Linux operating system.
+
+** GNU Utilities + Linux Kernel -> GNU/Linux OS:
+The combination of GNU utilities and the Linux kernel forms the basis of the GNU/Linux operating system. This collaborative effort brought together essential components to create a complete and functional operating system.
+
+** What is Kernel? (Method of Abstraction):
+The kernel is the core component of an operating system responsible for managing system resources, providing a layer of abstraction between hardware and software.
+
+** Kernel Architecture (Monolithic and Micro Kernel):
+Kernel architecture refers to the design approach of the operating system's core. Monolithic and microkernel are two different architectures, each with its own set of advantages and trade-offs.
+
+** User Space Vs Kernel Space:
+User space and kernel space represent two distinct levels of privilege in an operating system. User-level processes interact with applications, while kernel-level processes manage system resources at a lower level.
+
+** History of Free Software Movement:
+The free software movement has evolved over time, advocating for the freedom of users to run, modify, and distribute software. Richard Stallman's initiatives and the creation of the Free Software Foundation have played key roles in this movement.
+
+** History of Linux Kernel and Linus Torvalds:
+The history of the Linux kernel involves significant milestones in its development, with Linus Torvalds as the creator. Understanding this history provides insights into the growth of the Linux operating system.
+[[file:./LinusTorvalds.png]]
+*** Linux Kernel Version 0.01 (Sept 1991):
+Linus Torvalds released the initial version of the Linux kernel in September 1991. This marked the beginning of the development of the Linux operating system.
+
+
+** Different Fields Where Linux is Used:
+Linux finds applications in various industries, including servers, embedded systems, mobile devices, and supercomputers. Its versatility and open nature contribute to its widespread use.
+
+** Flavors of Linux:
+Linux distributions, or "distros," come in various flavors, each tailored to different user needs. Examples include Ubuntu, Fedora, and Debian, each with its unique features and package management systems.
+
+** Choosing the Right Distro:
+Selecting a Linux distribution involves considering factors such as user experience, package availability, and system requirements. Choosing the right distro ensures a good fit for specific use cases and preferences.
+
+** GUI vs CLI:
+The choice between Graphical User Interface (GUI) and Command Line Interface (CLI) depends on user preferences and the task at hand. GUIs provide a visual environment, while CLIs offer more direct and powerful control through commands.
+
+* Day1: Linux Installation on Oracle Virtual Box:
+
+** Step-by-Step Guide:
+A step-by-step guide provides detailed instructions for installing Linux on Oracle Virtual Box, ensuring a smooth and successful installation process.
+
+** ISO File Explained:
+The ISO file is a disk image containing the necessary files for installing Linux. Understanding this file is crucial for initiating the installation process on a virtual machine.
+
+** RAM, CPU, and Storage Allocation Explained:
+Configuring resource allocation, including RAM, CPU, and storage, ensures optimal performance for the virtual machine running Linux on Oracle Virtual Box.
+
+** Proper Installation Done:
+Completion of the Linux installation process on Oracle Virtual Box, with proper configuration and successful setup for further use.

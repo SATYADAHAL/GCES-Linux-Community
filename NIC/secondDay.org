@@ -1,0 +1,69 @@
+#+DATE: 2023-12-29 Fri
+#+AUTHOR: GCES Linux Community
+#+TITLE: Day 2
+#+CREATOR: GCES Linux Community
+#+LANGUAGE: en
+
+
+* Introduction to pty and tty.
+  - General overview of pseudo terminals. Usage of Default gnome-terminal.
+  - Terminals navigation and shortcuts.
+    
+* Basic Linux Commands along with some GNU Core Utilities & Flags.
+** 0. whoami
+   Example:print effective user name
+** 1. ls - List Directory Contents:
+   Example: ls or ls -l (to show detailed information)
+** 2. pwd - Print Working Directory:
+   Example: pwd
+** 3. cd - Change Directory:
+   Example: cd /path/to/directory
+*** Absolute vs relative Path
+**** Relative Path
+  Relative paths are specified from the current working directory.
+  Example: cd ../../path/to/directory
+**** Absolute Path
+  Absolute paths provide the full file or directory location from the root directory.
+    Example: cd /home/usrname/Desktop
+
+** 4. cp - Copy Files or Directories:
+   Example: cp sourcefile destination
+** 5. mv - Move (Rename) Files or Directories:
+   Example: mv oldname newname or mv source destination
+** 6. rm - Remove Files or Directories:
+   Example: rm filename or rm -r directory (be cautious with the -r option)
+** 7. shred - overwrite a file to hide its contents, and optionally delete it
+   Example: shred -n 10 filename
+** 7. mkdir - Create a Directory:
+   Example: mkdir -p ~/Desktop/Test/newFolder
+** 8. rmdir - Remove an Empty Directory:
+   Example: rmdir emptydirectory
+** 9. echo - Display a Message or Output:
+   Example: echo "Hello, World!"
+** 10. cat - Concatenate and Display File Content:
+   Example: cat filename
+** 11. man/whatis - Display Manual Pages for Commands:
+   Example: man commandName
+** 12. grep - Search Text Patterns:
+   Example: grep pattern filename
+** 13. kill - Terminate a Process:
+   Example: kill processId
+** 14. df - Display Disk Space Usage:
+   Example: df -h (to show human-readable sizes)
+** 15. du - Display File and Directory Space Usage:
+   Example: du -h (to show human-readable sizes)
+** 16. tar - Archive and Extract Files:
+   Example: tar -cvf archive.tar file1 file2 file3
+   Example: tar -xvf archive.tar --one-top-level
+** 17. zip - Compress or Decompress Files:
+   Example: gzip filename (compress) or gzip -d filename.gz (decompress)
+** 18. wc - print newline, word, and byte counts for each file
+   Example: wc filename
+** 19. ln - make links between files
+   Example: ln -s file1 sLink
+** 20. realpath - print the resolved path
+   Example:realpath filename --relative-to=[DIR]
+** 21. uname - print system information
+   Example: uname -a
+   
+

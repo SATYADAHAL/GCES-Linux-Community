@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-12-29 Fri 21:04 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day 2</title>
+<meta name="author" content="GCES Linux Community" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Day 2</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orga0b1c2e">1. Introduction to pty and tty.</a></li>
+<li><a href="#orgf9ffc83">2. Basic Linux Commands along with some GNU Core Utilities &amp; Flags.</a>
+<ul>
+<li><a href="#org8d67512">2.1. 0. whoami</a></li>
+<li><a href="#orgbd18403">2.2. 1. ls - List Directory Contents:</a></li>
+<li><a href="#org15af91d">2.3. 2. pwd - Print Working Directory:</a></li>
+<li><a href="#org7981384">2.4. 3. cd - Change Directory:</a>
+<ul>
+<li><a href="#org7526080">2.4.1. Absolute vs relative Path</a></li>
+</ul>
+</li>
+<li><a href="#org33a6608">2.5. 4. cp - Copy Files or Directories:</a></li>
+<li><a href="#orgb20d472">2.6. 5. mv - Move (Rename) Files or Directories:</a></li>
+<li><a href="#org6f7d1be">2.7. 6. rm - Remove Files or Directories:</a></li>
+<li><a href="#org7dd8643">2.8. 7. shred - overwrite a file to hide its contents, and optionally delete it</a></li>
+<li><a href="#orgf04f3d7">2.9. 7. mkdir - Create a Directory:</a></li>
+<li><a href="#orgb7e315f">2.10. 8. rmdir - Remove an Empty Directory:</a></li>
+<li><a href="#orgbba47c9">2.11. 9. echo - Display a Message or Output:</a></li>
+<li><a href="#orgfa72f5d">2.12. 10. cat - Concatenate and Display File Content:</a></li>
+<li><a href="#org09d3963">2.13. 11. man/whatis - Display Manual Pages for Commands:</a></li>
+<li><a href="#orgd76771d">2.14. 12. grep - Search Text Patterns:</a></li>
+<li><a href="#orgc3a985e">2.15. 13. kill - Terminate a Process:</a></li>
+<li><a href="#orgcea5cf7">2.16. 14. df - Display Disk Space Usage:</a></li>
+<li><a href="#org62c6fb3">2.17. 15. du - Display File and Directory Space Usage:</a></li>
+<li><a href="#org370fa8d">2.18. 16. tar - Archive and Extract Files:</a></li>
+<li><a href="#org748a432">2.19. 17. zip - Compress or Decompress Files:</a></li>
+<li><a href="#org1292e09">2.20. 18. wc - print newline, word, and byte counts for each file</a></li>
+<li><a href="#org0da09d3">2.21. 19. ln - make links between files</a></li>
+<li><a href="#org6c94bd3">2.22. 20. realpath - print the resolved path</a></li>
+<li><a href="#org374f265">2.23. 21. uname - print system information</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orga0b1c2e" class="outline-2">
+<h2 id="orga0b1c2e"><span class="section-number-2">1.</span> Introduction to pty and tty.</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>General overview of pseudo terminals. Usage of Default gnome-terminal.</li>
+<li>Terminals navigation and shortcuts.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf9ffc83" class="outline-2">
+<h2 id="orgf9ffc83"><span class="section-number-2">2.</span> Basic Linux Commands along with some GNU Core Utilities &amp; Flags.</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org8d67512" class="outline-3">
+<h3 id="org8d67512"><span class="section-number-3">2.1.</span> 0. whoami</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Example:print effective user name
+</p>
+</div>
+</div>
+<div id="outline-container-orgbd18403" class="outline-3">
+<h3 id="orgbd18403"><span class="section-number-3">2.2.</span> 1. ls - List Directory Contents:</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Example: ls or ls -l (to show detailed information)
+</p>
+</div>
+</div>
+<div id="outline-container-org15af91d" class="outline-3">
+<h3 id="org15af91d"><span class="section-number-3">2.3.</span> 2. pwd - Print Working Directory:</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Example: pwd
+</p>
+</div>
+</div>
+<div id="outline-container-org7981384" class="outline-3">
+<h3 id="org7981384"><span class="section-number-3">2.4.</span> 3. cd - Change Directory:</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Example: cd /path/to/directory
+</p>
+</div>
+<div id="outline-container-org7526080" class="outline-4">
+<h4 id="org7526080"><span class="section-number-4">2.4.1.</span> Absolute vs relative Path</h4>
+<div class="outline-text-4" id="text-2-4-1">
+</div>
+<ol class="org-ol">
+<li><a id="org112ca3c"></a>Relative Path<br />
+<div class="outline-text-5" id="text-2-4-1-1">
+<p>
+Relative paths are specified from the current working directory.
+Example: cd ../../path/to/directory
+</p>
+</div>
+</li>
+<li><a id="org5c771b7"></a>Absolute Path<br />
+<div class="outline-text-5" id="text-2-4-1-2">
+<p>
+Absolute paths provide the full file or directory location from the root directory.
+  Example: cd /home/usrname/Desktop
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org33a6608" class="outline-3">
+<h3 id="org33a6608"><span class="section-number-3">2.5.</span> 4. cp - Copy Files or Directories:</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Example: cp sourcefile destination
+</p>
+</div>
+</div>
+<div id="outline-container-orgb20d472" class="outline-3">
+<h3 id="orgb20d472"><span class="section-number-3">2.6.</span> 5. mv - Move (Rename) Files or Directories:</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+Example: mv oldname newname or mv source destination
+</p>
+</div>
+</div>
+<div id="outline-container-org6f7d1be" class="outline-3">
+<h3 id="org6f7d1be"><span class="section-number-3">2.7.</span> 6. rm - Remove Files or Directories:</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+Example: rm filename or rm -r directory (be cautious with the -r option)
+</p>
+</div>
+</div>
+<div id="outline-container-org7dd8643" class="outline-3">
+<h3 id="org7dd8643"><span class="section-number-3">2.8.</span> 7. shred - overwrite a file to hide its contents, and optionally delete it</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+Example: shred -n 10 filename
+</p>
+</div>
+</div>
+<div id="outline-container-orgf04f3d7" class="outline-3">
+<h3 id="orgf04f3d7"><span class="section-number-3">2.9.</span> 7. mkdir - Create a Directory:</h3>
+<div class="outline-text-3" id="text-2-9">
+<p>
+Example: mkdir -p ~/Desktop/Test/newFolder
+</p>
+</div>
+</div>
+<div id="outline-container-orgb7e315f" class="outline-3">
+<h3 id="orgb7e315f"><span class="section-number-3">2.10.</span> 8. rmdir - Remove an Empty Directory:</h3>
+<div class="outline-text-3" id="text-2-10">
+<p>
+Example: rmdir emptydirectory
+</p>
+</div>
+</div>
+<div id="outline-container-orgbba47c9" class="outline-3">
+<h3 id="orgbba47c9"><span class="section-number-3">2.11.</span> 9. echo - Display a Message or Output:</h3>
+<div class="outline-text-3" id="text-2-11">
+<p>
+Example: echo "Hello, World!"
+</p>
+</div>
+</div>
+<div id="outline-container-orgfa72f5d" class="outline-3">
+<h3 id="orgfa72f5d"><span class="section-number-3">2.12.</span> 10. cat - Concatenate and Display File Content:</h3>
+<div class="outline-text-3" id="text-2-12">
+<p>
+Example: cat filename
+</p>
+</div>
+</div>
+<div id="outline-container-org09d3963" class="outline-3">
+<h3 id="org09d3963"><span class="section-number-3">2.13.</span> 11. man/whatis - Display Manual Pages for Commands:</h3>
+<div class="outline-text-3" id="text-2-13">
+<p>
+Example: man commandName
+</p>
+</div>
+</div>
+<div id="outline-container-orgd76771d" class="outline-3">
+<h3 id="orgd76771d"><span class="section-number-3">2.14.</span> 12. grep - Search Text Patterns:</h3>
+<div class="outline-text-3" id="text-2-14">
+<p>
+Example: grep pattern filename
+</p>
+</div>
+</div>
+<div id="outline-container-orgc3a985e" class="outline-3">
+<h3 id="orgc3a985e"><span class="section-number-3">2.15.</span> 13. kill - Terminate a Process:</h3>
+<div class="outline-text-3" id="text-2-15">
+<p>
+Example: kill processId
+</p>
+</div>
+</div>
+<div id="outline-container-orgcea5cf7" class="outline-3">
+<h3 id="orgcea5cf7"><span class="section-number-3">2.16.</span> 14. df - Display Disk Space Usage:</h3>
+<div class="outline-text-3" id="text-2-16">
+<p>
+Example: df -h (to show human-readable sizes)
+</p>
+</div>
+</div>
+<div id="outline-container-org62c6fb3" class="outline-3">
+<h3 id="org62c6fb3"><span class="section-number-3">2.17.</span> 15. du - Display File and Directory Space Usage:</h3>
+<div class="outline-text-3" id="text-2-17">
+<p>
+Example: du -h (to show human-readable sizes)
+</p>
+</div>
+</div>
+<div id="outline-container-org370fa8d" class="outline-3">
+<h3 id="org370fa8d"><span class="section-number-3">2.18.</span> 16. tar - Archive and Extract Files:</h3>
+<div class="outline-text-3" id="text-2-18">
+<p>
+Example: tar -cvf archive.tar file1 file2 file3
+Example: tar -xvf archive.tar &#x2013;one-top-level
+</p>
+</div>
+</div>
+<div id="outline-container-org748a432" class="outline-3">
+<h3 id="org748a432"><span class="section-number-3">2.19.</span> 17. zip - Compress or Decompress Files:</h3>
+<div class="outline-text-3" id="text-2-19">
+<p>
+Example: gzip filename (compress) or gzip -d filename.gz (decompress)
+</p>
+</div>
+</div>
+<div id="outline-container-org1292e09" class="outline-3">
+<h3 id="org1292e09"><span class="section-number-3">2.20.</span> 18. wc - print newline, word, and byte counts for each file</h3>
+<div class="outline-text-3" id="text-2-20">
+<p>
+Example: wc filename
+</p>
+</div>
+</div>
+<div id="outline-container-org0da09d3" class="outline-3">
+<h3 id="org0da09d3"><span class="section-number-3">2.21.</span> 19. ln - make links between files</h3>
+<div class="outline-text-3" id="text-2-21">
+<p>
+Example: ln -s file1 sLink
+</p>
+</div>
+</div>
+<div id="outline-container-org6c94bd3" class="outline-3">
+<h3 id="org6c94bd3"><span class="section-number-3">2.22.</span> 20. realpath - print the resolved path</h3>
+<div class="outline-text-3" id="text-2-22">
+<p>
+Example:realpath filename &#x2013;relative-to=[DIR]
+</p>
+</div>
+</div>
+<div id="outline-container-org374f265" class="outline-3">
+<h3 id="org374f265"><span class="section-number-3">2.23.</span> 21. uname - print system information</h3>
+<div class="outline-text-3" id="text-2-23">
+<p>
+Example: uname -a
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023-12-29 Fri</p>
+<p class="author">Author: GCES Linux Community</p>
+<p class="date">Created: 2023-12-29 Fri 21:04</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
