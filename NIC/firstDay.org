@@ -1,6 +1,7 @@
 #+DATE: 2023-12-28 Thu
 #+AUTHOR: GCES Linux Community
 #+TITLE: Day 1
+#+HOURS: 1 hour
 #+CREATOR: GCES Linux Community
 #+LANGUAGE: en
 

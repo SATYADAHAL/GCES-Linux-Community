@@ -1,6 +1,7 @@
 #+DATE: 2023-12-29 Fri
 #+AUTHOR: GCES Linux Community
-#+TITLE: Day 2
+#+TITLE: Day 2 Day 3 and Day 4
+#+HOURS: 3 hours
 #+CREATOR: GCES Linux Community
 #+LANGUAGE: en
 
@@ -25,7 +26,6 @@
 **** Absolute Path
   Absolute paths provide the full file or directory location from the root directory.
     Example: cd /home/usrname/Desktop
-
 ** 4. cp - Copy Files or Directories:
    Example: cp sourcefile destination
 ** 5. mv - Move (Rename) Files or Directories:
@@ -65,5 +65,12 @@
    Example:realpath filename --relative-to=[DIR]
 ** 21. uname - print system information
    Example: uname -a
-   
-
+** 22. exit - Exit current shell
+   Example: exit
+** 23. tree - list contents of directories in a tree-like format
+   Example: tree -L 2
+** 24. shutdown - Power Off the machine
+   Example: shutdown now
+** 25. reboot - Reboot the machine
+   Example: reboot
+** 26. which - Shows the full path of (shell) commands.

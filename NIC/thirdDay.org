@@ -1,0 +1,118 @@
+#+DATE: 2023-12-31 Sun
+#+AUTHOR: GCES Linux Community
+#+TITLE: Day 5 and Day 6 and Day 7
+#+HOURS: 3 hours
+#+CREATOR: GCES Linux Community
+#+LANGUAGE: en
+
+
+* Fix username not in sudores file.
+ - Boot into recovery and then to root shell.
+ - mount -o rw,remount /
+ - adduser username sudo
+ - adduser username admin
+
+* File Permissions
+** 0. ~getfacl~
+   =Get file access control lists=
+   Example: ~getfacl filename~
+** 1. ~chmod~
+   =Change the permissions of a file or directory=
+   Example: ~chmod 644 filename.txt~
+   Example: ~chmod +x a.out~
+** 2. ~chown~
+   =Change file owner and group of file and folder=
+   Example: ~sudo chown newuser:newgroup myfile.txt~ #Change username and group
+   Example: ~sudo chown -R newuser:newgroup mydirectory~ #For directory
+   Example: ~sudo chown :newgroup myfile.txt~ #Change only the group of a file
+
+* User Managment Command
+** 0. ~adduser~
+  =Add a new user account. This command is overlay over ~useradd~ command.=
+  Example: ~sudo adduser username~
+  
+** 1. ~passwd~
+  =Change the user password.=
+  Example: ~sudo passwd username~
+  
+** 2. ~userdel~
+  =Delete a user account.=
+  Example: ~sudo userdel -r username~
+  
+** 3. ~usermod~
+  =Modify user account settings.=
+  Example: ~sudo usermod -options username~
+  Example: ~sudo usermod -aG sudo username~
+  
+** 4. ~su~
+   =Switch to another user account.=
+   Example: ~su - username~
+   
+** 5. ~id~
+   =Display user and group information for a user.=
+   Example: ~id~
+
+** 6. ~whoami~
+   =print effective user name=
+   Example: ~whoami~
+   
+* Group Managment Command
+** 0. ~groups~
+   =Display groups a user is a member of.=
+   Example: ~groups username~
+   
+** 1. ~groupadd~
+   =Add a new group.=
+   Example: ~sudo groupadd groupname~
+
+** 2. ~groupdel~
+   =Delete a group.=
+   Example: ~sudo groupdel groupname~
+
+** 3. ~groupmod~
+   =Modify group settings.=
+   Example: ~sudo groupmod -options groupname~
+   Example: ~sudo groupmod -n newName oldName~ #Rename Group
+
+** 4. ~gpasswd~
+   =Add or Remove user from group=
+   Example: ~sudo gpasswd -a username groupname~   # Add user to a group
+   Example: ~sudo gpasswd -d username groupname~   # Remove user from a group
+
+** 5. ~newgrp~
+   =Login to new group.=
+   Example: ~newgrp groupname~
+
+* File System Hierarchy
+** ~man hier~
+   Description of the filesystem hierarchy
+
+* Process Managment.
+** ~top~
+   =Real-time system monitoring tool that shows a dynamic view of system processes=
+   Example: ~top~
+** ~kill~
+   =Sends a signal to terminate a process with the specified Process ID (PID).=
+   Example: ~kill -9 <pid>~
+** ~htop~
+   =An advanced, interactive version of top that provides a more user-friendly interface for process management.=
+   Example: ~htop~
+** ~fg and bg~
+   =Puts a process in the background.=
+   =Brings a background process to the foreground=.
+   Example: ~./a.out &~
+   Example: ~fg~
+** ~ps~
+   =Displays a snapshot of currently running processes and other processes with different flags.=
+   Exampe: =ps aux=
+   
+** FileSystem hierarchy
+file:./fileSystemHier.webp
+
+* APT Package Manager
+** apt update
+** apt upgrade
+** apt install <package-name>
+** apt purge <package-name>
+** apt remove <package-name>
+** apt search <package-name>

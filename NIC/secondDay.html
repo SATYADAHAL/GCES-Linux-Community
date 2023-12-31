@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-12-29 Fri 21:04 -->
+<!-- 2023-12-31 Sun 11:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Day 2</title>
+<title>Day 2 Day 3 and Day 4</title>
 <meta name="author" content="GCES Linux Community" />
 <meta name="generator" content="Org Mode" />
 <style>
@@ -196,41 +196,46 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Day 2</h1>
+<h1 class="title">Day 2 Day 3 and Day 4</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga0b1c2e">1. Introduction to pty and tty.</a></li>
-<li><a href="#orgf9ffc83">2. Basic Linux Commands along with some GNU Core Utilities &amp; Flags.</a>
+<li><a href="#orgf1f48d1">1. Introduction to pty and tty.</a></li>
+<li><a href="#org4b8cd2b">2. Basic Linux Commands along with some GNU Core Utilities &amp; Flags.</a>
 <ul>
-<li><a href="#org8d67512">2.1. 0. whoami</a></li>
-<li><a href="#orgbd18403">2.2. 1. ls - List Directory Contents:</a></li>
-<li><a href="#org15af91d">2.3. 2. pwd - Print Working Directory:</a></li>
-<li><a href="#org7981384">2.4. 3. cd - Change Directory:</a>
+<li><a href="#orgd32c1c1">2.1. 0. whoami</a></li>
+<li><a href="#orgaa8740d">2.2. 1. ls - List Directory Contents:</a></li>
+<li><a href="#orge584690">2.3. 2. pwd - Print Working Directory:</a></li>
+<li><a href="#org9799920">2.4. 3. cd - Change Directory:</a>
 <ul>
-<li><a href="#org7526080">2.4.1. Absolute vs relative Path</a></li>
+<li><a href="#org8070a1a">2.4.1. Absolute vs relative Path</a></li>
 </ul>
 </li>
-<li><a href="#org33a6608">2.5. 4. cp - Copy Files or Directories:</a></li>
-<li><a href="#orgb20d472">2.6. 5. mv - Move (Rename) Files or Directories:</a></li>
-<li><a href="#org6f7d1be">2.7. 6. rm - Remove Files or Directories:</a></li>
-<li><a href="#org7dd8643">2.8. 7. shred - overwrite a file to hide its contents, and optionally delete it</a></li>
-<li><a href="#orgf04f3d7">2.9. 7. mkdir - Create a Directory:</a></li>
-<li><a href="#orgb7e315f">2.10. 8. rmdir - Remove an Empty Directory:</a></li>
-<li><a href="#orgbba47c9">2.11. 9. echo - Display a Message or Output:</a></li>
-<li><a href="#orgfa72f5d">2.12. 10. cat - Concatenate and Display File Content:</a></li>
-<li><a href="#org09d3963">2.13. 11. man/whatis - Display Manual Pages for Commands:</a></li>
-<li><a href="#orgd76771d">2.14. 12. grep - Search Text Patterns:</a></li>
-<li><a href="#orgc3a985e">2.15. 13. kill - Terminate a Process:</a></li>
-<li><a href="#orgcea5cf7">2.16. 14. df - Display Disk Space Usage:</a></li>
-<li><a href="#org62c6fb3">2.17. 15. du - Display File and Directory Space Usage:</a></li>
-<li><a href="#org370fa8d">2.18. 16. tar - Archive and Extract Files:</a></li>
-<li><a href="#org748a432">2.19. 17. zip - Compress or Decompress Files:</a></li>
-<li><a href="#org1292e09">2.20. 18. wc - print newline, word, and byte counts for each file</a></li>
-<li><a href="#org0da09d3">2.21. 19. ln - make links between files</a></li>
-<li><a href="#org6c94bd3">2.22. 20. realpath - print the resolved path</a></li>
-<li><a href="#org374f265">2.23. 21. uname - print system information</a></li>
+<li><a href="#org9ea92a8">2.5. 4. cp - Copy Files or Directories:</a></li>
+<li><a href="#orge9fec38">2.6. 5. mv - Move (Rename) Files or Directories:</a></li>
+<li><a href="#org221c22b">2.7. 6. rm - Remove Files or Directories:</a></li>
+<li><a href="#orgf6cda02">2.8. 7. shred - overwrite a file to hide its contents, and optionally delete it</a></li>
+<li><a href="#org879cbc8">2.9. 7. mkdir - Create a Directory:</a></li>
+<li><a href="#org0683659">2.10. 8. rmdir - Remove an Empty Directory:</a></li>
+<li><a href="#orge673599">2.11. 9. echo - Display a Message or Output:</a></li>
+<li><a href="#org2638806">2.12. 10. cat - Concatenate and Display File Content:</a></li>
+<li><a href="#org9837b9e">2.13. 11. man/whatis - Display Manual Pages for Commands:</a></li>
+<li><a href="#org6d29571">2.14. 12. grep - Search Text Patterns:</a></li>
+<li><a href="#orgcb6589a">2.15. 13. kill - Terminate a Process:</a></li>
+<li><a href="#orga997b8b">2.16. 14. df - Display Disk Space Usage:</a></li>
+<li><a href="#org07e907d">2.17. 15. du - Display File and Directory Space Usage:</a></li>
+<li><a href="#orga0a7c99">2.18. 16. tar - Archive and Extract Files:</a></li>
+<li><a href="#orgfd3538e">2.19. 17. zip - Compress or Decompress Files:</a></li>
+<li><a href="#orgc662150">2.20. 18. wc - print newline, word, and byte counts for each file</a></li>
+<li><a href="#org730285f">2.21. 19. ln - make links between files</a></li>
+<li><a href="#orgd3faefe">2.22. 20. realpath - print the resolved path</a></li>
+<li><a href="#org07ade65">2.23. 21. uname - print system information</a></li>
+<li><a href="#org6a7bc13">2.24. 22. exit - Exit current shell</a></li>
+<li><a href="#orgdb9b796">2.25. 23. tree - list contents of directories in a tree-like format</a></li>
+<li><a href="#orgd18bd60">2.26. 24. shutdown - Power Off the machine</a></li>
+<li><a href="#org693df7f">2.27. 25. reboot - Reboot the machine</a></li>
+<li><a href="#org56a2870">2.28. 26. which - Shows the full path of (shell) commands.</a></li>
 </ul>
 </li>
 </ul>
@@ -238,8 +243,8 @@
 </div>
 
 
-<div id="outline-container-orga0b1c2e" class="outline-2">
-<h2 id="orga0b1c2e"><span class="section-number-2">1.</span> Introduction to pty and tty.</h2>
+<div id="outline-container-orgf1f48d1" class="outline-2">
+<h2 id="orgf1f48d1"><span class="section-number-2">1.</span> Introduction to pty and tty.</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>General overview of pseudo terminals. Usage of Default gnome-terminal.</li>
@@ -248,47 +253,47 @@
 </div>
 </div>
 
-<div id="outline-container-orgf9ffc83" class="outline-2">
-<h2 id="orgf9ffc83"><span class="section-number-2">2.</span> Basic Linux Commands along with some GNU Core Utilities &amp; Flags.</h2>
+<div id="outline-container-org4b8cd2b" class="outline-2">
+<h2 id="org4b8cd2b"><span class="section-number-2">2.</span> Basic Linux Commands along with some GNU Core Utilities &amp; Flags.</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org8d67512" class="outline-3">
-<h3 id="org8d67512"><span class="section-number-3">2.1.</span> 0. whoami</h3>
+<div id="outline-container-orgd32c1c1" class="outline-3">
+<h3 id="orgd32c1c1"><span class="section-number-3">2.1.</span> 0. whoami</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Example:print effective user name
 </p>
 </div>
 </div>
-<div id="outline-container-orgbd18403" class="outline-3">
-<h3 id="orgbd18403"><span class="section-number-3">2.2.</span> 1. ls - List Directory Contents:</h3>
+<div id="outline-container-orgaa8740d" class="outline-3">
+<h3 id="orgaa8740d"><span class="section-number-3">2.2.</span> 1. ls - List Directory Contents:</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Example: ls or ls -l (to show detailed information)
 </p>
 </div>
 </div>
-<div id="outline-container-org15af91d" class="outline-3">
-<h3 id="org15af91d"><span class="section-number-3">2.3.</span> 2. pwd - Print Working Directory:</h3>
+<div id="outline-container-orge584690" class="outline-3">
+<h3 id="orge584690"><span class="section-number-3">2.3.</span> 2. pwd - Print Working Directory:</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Example: pwd
 </p>
 </div>
 </div>
-<div id="outline-container-org7981384" class="outline-3">
-<h3 id="org7981384"><span class="section-number-3">2.4.</span> 3. cd - Change Directory:</h3>
+<div id="outline-container-org9799920" class="outline-3">
+<h3 id="org9799920"><span class="section-number-3">2.4.</span> 3. cd - Change Directory:</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Example: cd /path/to/directory
 </p>
 </div>
-<div id="outline-container-org7526080" class="outline-4">
-<h4 id="org7526080"><span class="section-number-4">2.4.1.</span> Absolute vs relative Path</h4>
+<div id="outline-container-org8070a1a" class="outline-4">
+<h4 id="org8070a1a"><span class="section-number-4">2.4.1.</span> Absolute vs relative Path</h4>
 <div class="outline-text-4" id="text-2-4-1">
 </div>
 <ol class="org-ol">
-<li><a id="org112ca3c"></a>Relative Path<br />
+<li><a id="orgb8ef388"></a>Relative Path<br />
 <div class="outline-text-5" id="text-2-4-1-1">
 <p>
 Relative paths are specified from the current working directory.
@@ -296,7 +301,7 @@ Example: cd ../../path/to/directory
 </p>
 </div>
 </li>
-<li><a id="org5c771b7"></a>Absolute Path<br />
+<li><a id="org7a203b2"></a>Absolute Path<br />
 <div class="outline-text-5" id="text-2-4-1-2">
 <p>
 Absolute paths provide the full file or directory location from the root directory.
@@ -307,113 +312,112 @@ Absolute paths provide the full file or directory location from the root directo
 </ol>
 </div>
 </div>
-
-<div id="outline-container-org33a6608" class="outline-3">
-<h3 id="org33a6608"><span class="section-number-3">2.5.</span> 4. cp - Copy Files or Directories:</h3>
+<div id="outline-container-org9ea92a8" class="outline-3">
+<h3 id="org9ea92a8"><span class="section-number-3">2.5.</span> 4. cp - Copy Files or Directories:</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Example: cp sourcefile destination
 </p>
 </div>
 </div>
-<div id="outline-container-orgb20d472" class="outline-3">
-<h3 id="orgb20d472"><span class="section-number-3">2.6.</span> 5. mv - Move (Rename) Files or Directories:</h3>
+<div id="outline-container-orge9fec38" class="outline-3">
+<h3 id="orge9fec38"><span class="section-number-3">2.6.</span> 5. mv - Move (Rename) Files or Directories:</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Example: mv oldname newname or mv source destination
 </p>
 </div>
 </div>
-<div id="outline-container-org6f7d1be" class="outline-3">
-<h3 id="org6f7d1be"><span class="section-number-3">2.7.</span> 6. rm - Remove Files or Directories:</h3>
+<div id="outline-container-org221c22b" class="outline-3">
+<h3 id="org221c22b"><span class="section-number-3">2.7.</span> 6. rm - Remove Files or Directories:</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Example: rm filename or rm -r directory (be cautious with the -r option)
 </p>
 </div>
 </div>
-<div id="outline-container-org7dd8643" class="outline-3">
-<h3 id="org7dd8643"><span class="section-number-3">2.8.</span> 7. shred - overwrite a file to hide its contents, and optionally delete it</h3>
+<div id="outline-container-orgf6cda02" class="outline-3">
+<h3 id="orgf6cda02"><span class="section-number-3">2.8.</span> 7. shred - overwrite a file to hide its contents, and optionally delete it</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 Example: shred -n 10 filename
 </p>
 </div>
 </div>
-<div id="outline-container-orgf04f3d7" class="outline-3">
-<h3 id="orgf04f3d7"><span class="section-number-3">2.9.</span> 7. mkdir - Create a Directory:</h3>
+<div id="outline-container-org879cbc8" class="outline-3">
+<h3 id="org879cbc8"><span class="section-number-3">2.9.</span> 7. mkdir - Create a Directory:</h3>
 <div class="outline-text-3" id="text-2-9">
 <p>
 Example: mkdir -p ~/Desktop/Test/newFolder
 </p>
 </div>
 </div>
-<div id="outline-container-orgb7e315f" class="outline-3">
-<h3 id="orgb7e315f"><span class="section-number-3">2.10.</span> 8. rmdir - Remove an Empty Directory:</h3>
+<div id="outline-container-org0683659" class="outline-3">
+<h3 id="org0683659"><span class="section-number-3">2.10.</span> 8. rmdir - Remove an Empty Directory:</h3>
 <div class="outline-text-3" id="text-2-10">
 <p>
 Example: rmdir emptydirectory
 </p>
 </div>
 </div>
-<div id="outline-container-orgbba47c9" class="outline-3">
-<h3 id="orgbba47c9"><span class="section-number-3">2.11.</span> 9. echo - Display a Message or Output:</h3>
+<div id="outline-container-orge673599" class="outline-3">
+<h3 id="orge673599"><span class="section-number-3">2.11.</span> 9. echo - Display a Message or Output:</h3>
 <div class="outline-text-3" id="text-2-11">
 <p>
 Example: echo "Hello, World!"
 </p>
 </div>
 </div>
-<div id="outline-container-orgfa72f5d" class="outline-3">
-<h3 id="orgfa72f5d"><span class="section-number-3">2.12.</span> 10. cat - Concatenate and Display File Content:</h3>
+<div id="outline-container-org2638806" class="outline-3">
+<h3 id="org2638806"><span class="section-number-3">2.12.</span> 10. cat - Concatenate and Display File Content:</h3>
 <div class="outline-text-3" id="text-2-12">
 <p>
 Example: cat filename
 </p>
 </div>
 </div>
-<div id="outline-container-org09d3963" class="outline-3">
-<h3 id="org09d3963"><span class="section-number-3">2.13.</span> 11. man/whatis - Display Manual Pages for Commands:</h3>
+<div id="outline-container-org9837b9e" class="outline-3">
+<h3 id="org9837b9e"><span class="section-number-3">2.13.</span> 11. man/whatis - Display Manual Pages for Commands:</h3>
 <div class="outline-text-3" id="text-2-13">
 <p>
 Example: man commandName
 </p>
 </div>
 </div>
-<div id="outline-container-orgd76771d" class="outline-3">
-<h3 id="orgd76771d"><span class="section-number-3">2.14.</span> 12. grep - Search Text Patterns:</h3>
+<div id="outline-container-org6d29571" class="outline-3">
+<h3 id="org6d29571"><span class="section-number-3">2.14.</span> 12. grep - Search Text Patterns:</h3>
 <div class="outline-text-3" id="text-2-14">
 <p>
 Example: grep pattern filename
 </p>
 </div>
 </div>
-<div id="outline-container-orgc3a985e" class="outline-3">
-<h3 id="orgc3a985e"><span class="section-number-3">2.15.</span> 13. kill - Terminate a Process:</h3>
+<div id="outline-container-orgcb6589a" class="outline-3">
+<h3 id="orgcb6589a"><span class="section-number-3">2.15.</span> 13. kill - Terminate a Process:</h3>
 <div class="outline-text-3" id="text-2-15">
 <p>
 Example: kill processId
 </p>
 </div>
 </div>
-<div id="outline-container-orgcea5cf7" class="outline-3">
-<h3 id="orgcea5cf7"><span class="section-number-3">2.16.</span> 14. df - Display Disk Space Usage:</h3>
+<div id="outline-container-orga997b8b" class="outline-3">
+<h3 id="orga997b8b"><span class="section-number-3">2.16.</span> 14. df - Display Disk Space Usage:</h3>
 <div class="outline-text-3" id="text-2-16">
 <p>
 Example: df -h (to show human-readable sizes)
 </p>
 </div>
 </div>
-<div id="outline-container-org62c6fb3" class="outline-3">
-<h3 id="org62c6fb3"><span class="section-number-3">2.17.</span> 15. du - Display File and Directory Space Usage:</h3>
+<div id="outline-container-org07e907d" class="outline-3">
+<h3 id="org07e907d"><span class="section-number-3">2.17.</span> 15. du - Display File and Directory Space Usage:</h3>
 <div class="outline-text-3" id="text-2-17">
 <p>
 Example: du -h (to show human-readable sizes)
 </p>
 </div>
 </div>
-<div id="outline-container-org370fa8d" class="outline-3">
-<h3 id="org370fa8d"><span class="section-number-3">2.18.</span> 16. tar - Archive and Extract Files:</h3>
+<div id="outline-container-orga0a7c99" class="outline-3">
+<h3 id="orga0a7c99"><span class="section-number-3">2.18.</span> 16. tar - Archive and Extract Files:</h3>
 <div class="outline-text-3" id="text-2-18">
 <p>
 Example: tar -cvf archive.tar file1 file2 file3
@@ -421,52 +425,87 @@ Example: tar -xvf archive.tar &#x2013;one-top-level
 </p>
 </div>
 </div>
-<div id="outline-container-org748a432" class="outline-3">
-<h3 id="org748a432"><span class="section-number-3">2.19.</span> 17. zip - Compress or Decompress Files:</h3>
+<div id="outline-container-orgfd3538e" class="outline-3">
+<h3 id="orgfd3538e"><span class="section-number-3">2.19.</span> 17. zip - Compress or Decompress Files:</h3>
 <div class="outline-text-3" id="text-2-19">
 <p>
 Example: gzip filename (compress) or gzip -d filename.gz (decompress)
 </p>
 </div>
 </div>
-<div id="outline-container-org1292e09" class="outline-3">
-<h3 id="org1292e09"><span class="section-number-3">2.20.</span> 18. wc - print newline, word, and byte counts for each file</h3>
+<div id="outline-container-orgc662150" class="outline-3">
+<h3 id="orgc662150"><span class="section-number-3">2.20.</span> 18. wc - print newline, word, and byte counts for each file</h3>
 <div class="outline-text-3" id="text-2-20">
 <p>
 Example: wc filename
 </p>
 </div>
 </div>
-<div id="outline-container-org0da09d3" class="outline-3">
-<h3 id="org0da09d3"><span class="section-number-3">2.21.</span> 19. ln - make links between files</h3>
+<div id="outline-container-org730285f" class="outline-3">
+<h3 id="org730285f"><span class="section-number-3">2.21.</span> 19. ln - make links between files</h3>
 <div class="outline-text-3" id="text-2-21">
 <p>
 Example: ln -s file1 sLink
 </p>
 </div>
 </div>
-<div id="outline-container-org6c94bd3" class="outline-3">
-<h3 id="org6c94bd3"><span class="section-number-3">2.22.</span> 20. realpath - print the resolved path</h3>
+<div id="outline-container-orgd3faefe" class="outline-3">
+<h3 id="orgd3faefe"><span class="section-number-3">2.22.</span> 20. realpath - print the resolved path</h3>
 <div class="outline-text-3" id="text-2-22">
 <p>
 Example:realpath filename &#x2013;relative-to=[DIR]
 </p>
 </div>
 </div>
-<div id="outline-container-org374f265" class="outline-3">
-<h3 id="org374f265"><span class="section-number-3">2.23.</span> 21. uname - print system information</h3>
+<div id="outline-container-org07ade65" class="outline-3">
+<h3 id="org07ade65"><span class="section-number-3">2.23.</span> 21. uname - print system information</h3>
 <div class="outline-text-3" id="text-2-23">
 <p>
 Example: uname -a
 </p>
 </div>
 </div>
+<div id="outline-container-org6a7bc13" class="outline-3">
+<h3 id="org6a7bc13"><span class="section-number-3">2.24.</span> 22. exit - Exit current shell</h3>
+<div class="outline-text-3" id="text-2-24">
+<p>
+Example: exit
+</p>
+</div>
+</div>
+<div id="outline-container-orgdb9b796" class="outline-3">
+<h3 id="orgdb9b796"><span class="section-number-3">2.25.</span> 23. tree - list contents of directories in a tree-like format</h3>
+<div class="outline-text-3" id="text-2-25">
+<p>
+Example: tree -L 2
+</p>
+</div>
+</div>
+<div id="outline-container-orgd18bd60" class="outline-3">
+<h3 id="orgd18bd60"><span class="section-number-3">2.26.</span> 24. shutdown - Power Off the machine</h3>
+<div class="outline-text-3" id="text-2-26">
+<p>
+Example: shutdown now
+</p>
+</div>
+</div>
+<div id="outline-container-org693df7f" class="outline-3">
+<h3 id="org693df7f"><span class="section-number-3">2.27.</span> 25. reboot - Reboot the machine</h3>
+<div class="outline-text-3" id="text-2-27">
+<p>
+Example: reboot
+</p>
+</div>
+</div>
+<div id="outline-container-org56a2870" class="outline-3">
+<h3 id="org56a2870"><span class="section-number-3">2.28.</span> 26. which - Shows the full path of (shell) commands.</h3>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2023-12-29 Fri</p>
 <p class="author">Author: GCES Linux Community</p>
-<p class="date">Created: 2023-12-29 Fri 21:04</p>
+<p class="date">Created: 2023-12-31 Sun 11:54</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
