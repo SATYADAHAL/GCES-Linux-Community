@@ -10,3 +10,4 @@
 |<br>[Day 1](https://htmlpreview.github.io/?https://github.com/SATYADAHAL/GCES-Linux-Community/blob/main/NIC/firstDay.html)|
 |<br>[Day 2,3,4](https://htmlpreview.github.io/?https://github.com/SATYADAHAL/GCES-Linux-Community/blob/main/NIC/secondDay.html)|
 |<br>[Day 5,6,7](https://htmlpreview.github.io/?https://github.com/SATYADAHAL/GCES-Linux-Community/blob/main/NIC/thirdDay.html)|
+|<br>[Day 8](https://htmlpreview.github.io/?https://github.com/SATYADAHAL/GCES-Linux-Community/blob/main/NIC/fourthDay.html)|
