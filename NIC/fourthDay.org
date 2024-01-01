@@ -1,0 +1,150 @@
+#+DATE: 2024-01-01 Mon
+#+AUTHOR: GCES Linux Community
+#+TITLE: Day 8
+#+HOURS: 1 hour 30 min
+#+CREATOR: GCES Linux Community
+#+LANGUAGE: en
+
+* Shell
+=A Linux shell is a command-line interface that allows users to interact with the operating system   kernel by entering commands.It interprets user inputs and executes commands, facilitating communication between the user and the Linux kernel.=
+** sh (Bourne Shell)
+=The Bourne Shell is one of the oldest and simplest Unix shells. It provides a basic set of features and is the ancestor of many other shells, including Bash. While it lacks some of the advanced features found in newer shells, it is lightweight and widely available.=
+
+** csh (C Shell)
+=The C Shell is another early Unix shell that was developed with a syntax resembling the C programming language. It includes features like command history and job control. However, its scripting capabilities are considered less powerful than those of the Bourne Shell and its successors. "tcsh" (TENEX C Shell) is an extended version of the C Shell with additional features.=
+
+** Bash (Bourne Again SHell)
+=The default shell for most Linux distributions. It's a powerful and versatile shell with a wide range of features.=
+
+** Zsh (Z Shell)
+=An extended and user-friendly shell that incorporates features from other shells, offering advanced tab completion and theming.=
+
+** Fish (Friendly Interactive SHell)
+=Designed to be user-friendly with a focus on simplicity and discoverability. It has syntax highlighting and auto-suggestions.=
+
+** Ksh (KornShell)
+=A shell with a rich command and scripting language, offering both interactive and scripting capabilities.=
+
+** Dash
+=A lightweight and fast shell, often used in system scripts. It aims to be POSIX-compliant and is designed for efficiency.=
+
+** Tcsh (TENEX C Shell)
+=An enhanced version of the C shell (csh) with additional features such as command-line editing and job control.=
+
+* Bash Scripting
+** Basic Operators
+| Category                | Operators                                                   |
+|-------------------------+-------------------------------------------------------------|
+| Arithmetic Operators    | + , -, *, /, %, ++, --                                      |
+|-------------------------+-------------------------------------------------------------|
+| Comparison Operators    | ​=​= , != , >, <, -ge, -le                                      |
+|-------------------------+-------------------------------------------------------------|
+| Logical Operators       | && (AND), || (OR)                                            |
+|-------------------------+-------------------------------------------------------------|
+| String Operators        | = (Assignment), \== (Equality), + (Concatenation)            |
+|-------------------------+-------------------------------------------------------------|
+| String Manipulation     | ${string:position:length}, ${#string}                        |
+|-------------------------+-------------------------------------------------------------|
+| File Operators          | -e (Exists), -f (Regular File), -d (Directory), -r (Readable)|
+|-------------------------+-------------------------------------------------------------|
+| Variable Assignment     | = (Simple Assignment)                                        |
+|-------------------------+-------------------------------------------------------------|
+| Command Substitution    | $(command) or \`command\`                                    |
+|-------------------------+-------------------------------------------------------------|
+| Grouping                | ( ... )                                                      |
+|-------------------------+-------------------------------------------------------------|
+| Redirection             | >, >>, <, \|                                                 |
+|-------------------------+-------------------------------------------------------------|
+| Ternary Operator        | condition ? expr1 : expr2                                    |
+
+** Variable
+#+BEGIN_SRC bash
+  #!/bin/bash
+  greeting="Hello, This is a test."
+  echo $greeting
+#+END_SRC
+
+#+RESULTS:
+| Hello | This is a test. |
+
+** Loop
+#+BEGIN_SRC bash
+#!/bin/bash
+for i in {1..10}; do
+    echo "Iteration $i"
+done
+#+END_SRC
+
+** Condition
+#+BEGIN_SRC bash
+  #!/bin/bash
+  number=1
+  if [ $number -gt 5 ]; then
+      echo "The number is greater than 5."
+  else
+      echo "The number is not greater than 5."
+  fi
+#+END_SRC
+
+** Function
+#+BEGIN_SRC bash
+  #!/bin/bash
+  multiply_numbers() {
+      result=$(( $1 * $2 ))
+      echo "Multiplication result: $result"
+  }
+  multiply_numbers 3 5
+#+END_SRC
+
+#+RESULTS:
+: Multiplication result: 15
+
+** Bash Config file
+The .bashrc file is a script that Bash (Bourne Again SHell) runs whenever it is started interactively. It stands for "Bash Run Commands." The primary purpose of the .bashrc file is to customize the behavior and environment of the Bash shell for a specific user.
+
+* Cron Tab
+=In Linux and Unix-like operating systems, the cron service is used to schedule tasks to run  automatically at specified intervals. The term "cron" comes from the Greek word "chronos," meaning time.=
+** Crontab Command:
+=The crontab command is used to create, edit, and manage cron jobs for a user. Each user can have their own crontab, and these are stored in the /var/spool/cron directory.=
+** Format
+ ~minute hour day month day_of_week command_to_run~
+ Example: Cron entry that runs a script every day at 3:30 PM
+         ~30 15 * * * /path/to/script.sh~
+ Example: Cron entry that runs every 1 hour.
+         ~0 * * * *~ ~/path/to/script.sh~
+ Example: Cron entry that runs every 1 minute.
+         ~* * * * *~ ~/path/to/script.sh~
+
+** Edit Crontab
+  ~crontab -e~
+** Display Current Crontab entries.
+  ~crontab -l~
+** Remove crontab entry.
+  ~crontab -r~
+
+
+
+
+
+  
+* Systemd and Systemctl
+~systemd~ is a system and service manager for Linux operating systems. It is responsible for initializing and managing the system components, services, and processes. ~systemctl~ is a command-line utility that serves as an interface to control and query the systemd system and service manager.
+** Create a custom service myservice.service
+   ~sudo vim /etc/systemd/system/myservice.service~
+   #+BEGIN_SRC ini
+          [Unit]
+	  Description=My Service
+	  [Service]
+	  Type=simple
+	  ExecStart=/bin/bash /home/spd/script.bash
+	  Restart=always
+	  RestartSec=5
+	  [Install]
+	  WantedBy=default.target
+   #+END_SRC
+** sudo systemctl start myservice.service
+** sudo systemctl enable myservice.service
+** sudo systemctl status myservice.service
+** sudo systemctl restart myservice.serice
+** sudo systemctl restart 
+
