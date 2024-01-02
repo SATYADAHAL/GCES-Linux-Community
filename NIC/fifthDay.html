@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-01-02 Tue 19:48 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day 9</title>
+<meta name="author" content="GCES Linux Community" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Day 9</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3ffa7a0">1. Networking and Firewall</a>
+<ul>
+<li><a href="#orgb75950c">1.1. <code>ping &lt;domain or IP&gt;</code></a></li>
+<li><a href="#org4c1668e">1.2. <code>ip</code></a>
+<ul>
+<li><a href="#org473e910">1.2.1. <code>ip link show</code></a></li>
+<li><a href="#org80f10f6">1.2.2. <code>ip addr show</code></a></li>
+<li><a href="#orga050b49">1.2.3. <code>ip link set dev &lt;interface&gt; up</code></a></li>
+<li><a href="#orgb7c6f65">1.2.4. <code>ip link set dev &lt;interface&gt; down</code></a></li>
+</ul>
+</li>
+<li><a href="#org5dce981">1.3. <code>host &lt;domainName&gt;</code></a></li>
+<li><a href="#org2fc414f">1.4. <code>curl</code></a></li>
+<li><a href="#orgf06cbce">1.5. <code>wget -c</code></a></li>
+<li><a href="#orgb78dd96">1.6. <code>ssh</code></a></li>
+<li><a href="#org6503d49">1.7. SCP (Secure Copy Protocol)</a></li>
+</ul>
+</li>
+<li><a href="#orgb0f05e2">2. IP Tables</a>
+<ul>
+<li><a href="#org08beda6">2.1. Basic Terms</a></li>
+<li><a href="#org4001a40">2.2. Basic Rules</a>
+<ul>
+<li><a href="#orgf144c85">2.2.1. Listing Rules</a></li>
+<li><a href="#org05a5744">2.2.2. Block port number</a></li>
+<li><a href="#orga7c4ee2">2.2.3. Block IP addr</a></li>
+<li><a href="#orgaa23a37">2.2.4. Add Rule at Specific index</a></li>
+<li><a href="#org7a4b0c3">2.2.5. Block all incoming traffic</a></li>
+<li><a href="#org6c23caf">2.2.6. Flush All Rules</a></li>
+<li><a href="#orgfa2dc87">2.2.7. Save and Restore Rules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3ffa7a0" class="outline-2">
+<h2 id="org3ffa7a0"><span class="section-number-2">1.</span> Networking and Firewall</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<code>Linux provides a variety of networking commands and tools to help you manage and troubleshoot network-related tasks. Here are some basic Linux networking commands and tools.</code>
+</p>
+</div>
+<div id="outline-container-orgb75950c" class="outline-3">
+<h3 id="orgb75950c"><span class="section-number-3">1.1.</span> <code>ping &lt;domain or IP&gt;</code></h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+<code>Test the reachability of a host on a network.</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org4c1668e" class="outline-3">
+<h3 id="org4c1668e"><span class="section-number-3">1.2.</span> <code>ip</code></h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+<code>Tool for configuring and managing network interfaces on Linux systems. It is part of the iproute2 package and is designed to replace the older ~ifconfig~, ~route~, and ~arp~ commands.</code>
+</p>
+</div>
+<div id="outline-container-org473e910" class="outline-4">
+<h4 id="org473e910"><span class="section-number-4">1.2.1.</span> <code>ip link show</code></h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+<code>- Show All Interfaces</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org80f10f6" class="outline-4">
+<h4 id="org80f10f6"><span class="section-number-4">1.2.2.</span> <code>ip addr show</code></h4>
+<div class="outline-text-4" id="text-1-2-2">
+<p>
+<code>- Show IP Addresses</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orga050b49" class="outline-4">
+<h4 id="orga050b49"><span class="section-number-4">1.2.3.</span> <code>ip link set dev &lt;interface&gt; up</code></h4>
+<div class="outline-text-4" id="text-1-2-3">
+<p>
+<code>- Enable an Interface</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgb7c6f65" class="outline-4">
+<h4 id="orgb7c6f65"><span class="section-number-4">1.2.4.</span> <code>ip link set dev &lt;interface&gt; down</code></h4>
+<div class="outline-text-4" id="text-1-2-4">
+<p>
+<code>- Disable an Interface</code>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5dce981" class="outline-3">
+<h3 id="org5dce981"><span class="section-number-3">1.3.</span> <code>host &lt;domainName&gt;</code></h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+<code>- Perform DNS lookups.</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org2fc414f" class="outline-3">
+<h3 id="org2fc414f"><span class="section-number-3">1.4.</span> <code>curl</code></h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+<code>- Command-line tool for making HTTP requests.</code>
+  Example: <code>curl https://raw.githubusercontent.com/SATYADAHAL/GCES-Linux-Community/main/NIC/secondDay.html</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgf06cbce" class="outline-3">
+<h3 id="orgf06cbce"><span class="section-number-3">1.5.</span> <code>wget -c</code></h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+<code>- Download files from the web.</code>
+  Example: <code>wget -c https://releases.ubuntu.com/23.10.1/ubuntu-23.10.1-desktop-amd64.iso</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgb78dd96" class="outline-3">
+<h3 id="orgb78dd96"><span class="section-number-3">1.6.</span> <code>ssh</code></h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+<code>SSH, or Secure Shell, is a cryptographic network protocol used to securely access and manage network devices, servers, and other computers over  an unsecured network. It provides a secure way for users to log into and execute commands on a remote machine</code>
+Syntax:
+<code>ssh [options] [username]@[hostname or IP address]</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6503d49" class="outline-3">
+<h3 id="org6503d49"><span class="section-number-3">1.7.</span> SCP (Secure Copy Protocol)</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+<code>SCP is a network protocol used for securely transferring files between a local host and a remote host or between two remote hosts.</code>
+Syntax:
+<code>scp [location of src file] [username]@[hostname or IP address]:[dest location]</code>
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb0f05e2" class="outline-2">
+<h2 id="orgb0f05e2"><span class="section-number-2">2.</span> IP Tables</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<code>In Linux, iptables is a powerful firewall management tool that allows you to configure the IP packet filter rules of the Linux kernel. It is used to set up, maintain, and inspect the tables of IP packet filter rules in the Linux kernel. Here are some basic terms and commands to get you started with iptables:</code>
+</p>
+</div>
+<div id="outline-container-org08beda6" class="outline-3">
+<h3 id="org08beda6"><span class="section-number-3">2.1.</span> Basic Terms</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Tables
+<code>iptables uses three main tables to organize rules: filter, nat, and mangle. The filter table is used for packet filtering, nat is used for network address translation, and mangle is used for packet alteration.</code></li>
+
+<li>Chains
+<code>Chains are sequences of rules within a table. Common chains in the filter table include INPUT, OUTPUT, and FORWARD. These chains determine what happens to packets based on their source, destination, or other criteria.</code></li>
+
+<li>Targets
+<code>A target is the action to be taken if a packet matches a rule. Common targets include ACCEPT, DROP, REJECT, and LOG.</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4001a40" class="outline-3">
+<h3 id="org4001a40"><span class="section-number-3">2.2.</span> Basic Rules</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-orgf144c85" class="outline-4">
+<h4 id="orgf144c85"><span class="section-number-4">2.2.1.</span> Listing Rules</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+<code>sudo iptables -L</code>
+<code>sudo iptables -L --line-numbers</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org05a5744" class="outline-4">
+<h4 id="org05a5744"><span class="section-number-4">2.2.2.</span> Block port number</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+<code>sudo iptables -A INPUT -p tcp --dport 22 -j DROP</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orga7c4ee2" class="outline-4">
+<h4 id="orga7c4ee2"><span class="section-number-4">2.2.3.</span> Block IP addr</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<p>
+<code>sudo iptables -A INPUT -s &lt;ip-addr&gt; -j DROP</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgaa23a37" class="outline-4">
+<h4 id="orgaa23a37"><span class="section-number-4">2.2.4.</span> Add Rule at Specific index</h4>
+<div class="outline-text-4" id="text-2-2-4">
+<ul class="org-ul">
+<li>Example below accepts incoming INPUT from given IP.
+<code>sudo iptables --insert INPUT &lt;rule-index&gt; -s &lt;ip-addr&gt; -j ACCEPT</code></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7a4b0c3" class="outline-4">
+<h4 id="org7a4b0c3"><span class="section-number-4">2.2.5.</span> Block all incoming traffic</h4>
+<div class="outline-text-4" id="text-2-2-5">
+<p>
+<code>sudo iptables -A INPUT -j DROP</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org6c23caf" class="outline-4">
+<h4 id="org6c23caf"><span class="section-number-4">2.2.6.</span> Flush All Rules</h4>
+<div class="outline-text-4" id="text-2-2-6">
+<p>
+<code>sudo iptables -F</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgfa2dc87" class="outline-4">
+<h4 id="orgfa2dc87"><span class="section-number-4">2.2.7.</span> Save and Restore Rules</h4>
+<div class="outline-text-4" id="text-2-2-7">
+<ul class="org-ul">
+<li>Save the rules
+<code>sudo iptables-save &gt; /etc/iptables/rules.v4</code></li>
+<li>Restore the rules
+<code>sudo iptables-restore &lt; /etc/iptables/rules.v4</code></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2024-01-2 Fri</p>
+<p class="author">Author: GCES Linux Community</p>
+<p class="date">Created: 2024-01-02 Tue 19:48</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

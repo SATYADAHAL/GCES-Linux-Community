@@ -1,0 +1,73 @@
+#+DATE: 2024-01-2 Fri
+#+AUTHOR: GCES Linux Community
+#+TITLE: Day 9
+#+HOURS: 2 hour
+#+CREATOR: GCES Linux Community
+#+LANGUAGE: en
+
+* Networking and Firewall
+=Linux provides a variety of networking commands and tools to help you manage and troubleshoot network-related tasks. Here are some basic Linux networking commands and tools.=
+** ~ping <domain or IP>~
+=Test the reachability of a host on a network.=
+** ~ip~
+=Tool for configuring and managing network interfaces on Linux systems. It is part of the iproute2 package and is designed to replace the older ~ifconfig~, ~route~, and ~arp~ commands.=
+*** ~ip link show~
+=- Show All Interfaces=
+*** ~ip addr show~
+=- Show IP Addresses=
+*** ~ip link set dev <interface> up~
+=- Enable an Interface=
+*** ~ip link set dev <interface> down~
+=- Disable an Interface=
+** ~host <domainName>~
+=- Perform DNS lookups.=
+** ~curl~
+=- Command-line tool for making HTTP requests.=
+  Example: ~curl https://raw.githubusercontent.com/SATYADAHAL/GCES-Linux-Community/main/NIC/secondDay.html~
+** ~wget -c~
+=- Download files from the web.=
+  Example: ~wget -c https://releases.ubuntu.com/23.10.1/ubuntu-23.10.1-desktop-amd64.iso~
+** ~ssh~
+ =SSH, or Secure Shell, is a cryptographic network protocol used to securely access and manage network devices, servers, and other computers over  an unsecured network. It provides a secure way for users to log into and execute commands on a remote machine=
+ Syntax:
+ ~ssh [options] [username]@[hostname or IP address]~
+
+** SCP (Secure Copy Protocol)
+  =SCP is a network protocol used for securely transferring files between a local host and a remote host or between two remote hosts.=
+  Syntax:
+  ~scp [location of src file] [username]@[hostname or IP address]:[dest location]~
+
+
+* IP Tables
+=In Linux, iptables is a powerful firewall management tool that allows you to configure the IP packet filter rules of the Linux kernel. It is used to set up, maintain, and inspect the tables of IP packet filter rules in the Linux kernel. Here are some basic terms and commands to get you started with iptables:=
+** Basic Terms
+    * Tables
+     =iptables uses three main tables to organize rules: filter, nat, and mangle. The filter table is used for packet filtering, nat is used for network address translation, and mangle is used for packet alteration.=
+
+    * Chains
+     =Chains are sequences of rules within a table. Common chains in the filter table include INPUT, OUTPUT, and FORWARD. These chains determine what happens to packets based on their source, destination, or other criteria.=
+
+    * Targets
+     =A target is the action to be taken if a packet matches a rule. Common targets include ACCEPT, DROP, REJECT, and LOG.=
+** Basic Rules
+*** Listing Rules
+~sudo iptables -L~
+~sudo iptables -L --line-numbers~
+*** Block port number
+~sudo iptables -A INPUT -p tcp --dport 22 -j DROP~
+*** Block IP addr
+~sudo iptables -A INPUT -s <ip-addr> -j DROP~
+*** Add Rule at Specific index
+- Example below accepts incoming INPUT from given IP.
+ ~sudo iptables --insert INPUT <rule-index> -s <ip-addr> -j ACCEPT~
+*** Block all incoming traffic
+~sudo iptables -A INPUT -j DROP~
+*** Flush All Rules
+~sudo iptables -F~
+*** Save and Restore Rules
+- Save the rules
+ ~sudo iptables-save > /etc/iptables/rules.v4~
+- Restore the rules
+ ~sudo iptables-restore < /etc/iptables/rules.v4~
+
+ 
