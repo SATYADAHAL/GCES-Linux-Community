@@ -1,0 +1,277 @@
+#+DATE: 2024-01-03 Wed
+#+AUTHOR: GCES Linux Community
+#+TITLE: Day 10
+#+HOURS: 2 hour
+#+CREATOR: GCES Linux Community
+#+LANGUAGE: en
+
+
+* Firewalld
+=Firewalld is a dynamically managed firewall solution for Linux systems that provides a high-level interface for managing firewall rules. It is designed to be more user-friendly and flexible than traditional static firewall configurations.=
+** Zone
+A zone is a predefined set of rules that specify the level of trust for a network or interface. Each zone has its own set of rules for incoming and outgoing traffic. Examples include public, work, home, internal, and external.
+** Service:
+A service is a predefined set of rules that define access to specific network services. For example, there are services for HTTP, HTTPS, SSH, FTP, etc. Services are associated with specific ports and protocols.
+** Rich Rule:
+Rich rules provide a more flexible way to define firewall rules using a syntax that allows complex conditions. Rich rules are often used for more advanced configurations beyond the capabilities of predefined services.
+** Permanent vs. Runtime:
+Changes to the firewall configuration can be made either permanently (persist across reboots) or at runtime (applied immediately but not persisted). The --permanent option is used for permanent changes.
+** Default Zone:
+The default zone is the zone assigned to network interfaces that are not explicitly configured. It determines the default behavior for incoming and outgoing traffic.
+** Reload:
+After making changes to the firewall configuration, the --reload command is used to apply the new settings without restarting the entire firewall.
+** Masquerade:
+Masquerading is a form of Network Address Translation (NAT) that allows a network to share a single public IP address. It is often used when a local network needs to access the internet through a single external IP.
+** Port Forwarding:
+Port forwarding allows incoming traffic on a specific port to be redirected to a different port or IP address. This can be useful for exposing services on internal networks to the outside world.
+** Reject vs. Drop:
+Reject sends an error message back to the source, indicating that the connection was not allowed. Drop simply discards the packet without sending any notification.
+** Source and Destination:
+Rules can be specified based on the source and destination addresses. Understanding how to use these parameters allows you to control traffic based on the origin or destination of packets.
+** Logging:
+Enabling logging for specific rules can help you monitor the firewall's activity. It allows you to see which packets are matching a particular rule.
+** Interfaces:
+Interfaces represent network connections on your system. You can associate specific rules or zones with specific interfaces to control traffic.
+** ~Firewalld config~
+*** Install
+~sudo yum install firewalld~
+~sudo apt install firewalld~
+
+*** Start and enable service
+~sudo systemctl start firewalld~
+~sudo systemctl enable firewalld~
+~sudo systemctl status firewalld~
+
+** Basic Firewalld Config
+*** List all rules
+~sudo firewall-cmd --list-all~
+*** Drop port 22
+~sudo firewall-cmd --add-rich-rule='rule family="ipv4" service name="ssh" drop'~
+*** Block ivp-4 address
+~sudo firewall-cmd --add-rich-rule='rule family="ipv4" source address="<ip-addr>" drop'~
+*** Note: firewalld doesn't use explicit rule indexes
+*** Block All Incoming Traffic
+~sudo firewall-cmd --set-default-zone=drop~
+*** Flush All Rules
+~sudo firewall-cmd --complete-reload~
+
+* UFW
+=ufw stands for Uncomplicated Firewall. It is a user-friendly command-line interface for managing iptables, the default firewall management tool in many Linux distributions. ufw aims to simplify the process of configuring a firewall, making it more accessible to users who may not be familiar with iptables syntax.=
+** Listing Rules
+   #+BEGIN_SRC shell
+   sudo ufw status verbose
+   #+END_SRC
+
+** Block Port Number
+   #+BEGIN_SRC shell
+   sudo ufw deny 22
+   #+END_SRC
+
+** Block IP Address
+   #+BEGIN_SRC shell
+   sudo ufw deny from <ip-addr>
+   #+END_SRC
+   
+** Add Rule at Specific Index
+   #+BEGIN_SRC shell
+   sudo ufw insert 1 allow from <ip-addr> to any app OpenSSH
+   #+END_SRC
+
+** Block All Incoming Traffic
+   #+BEGIN_SRC shell
+   sudo ufw default deny incoming
+   #+END_SRC
+
+** Flush All Rules
+   #+BEGIN_SRC shell
+   sudo ufw reset
+   #+END_SRC
+
+** Save and Restore Rules
+*** Save the Rules
+   #+BEGIN_SRC shell
+   sudo ufw status verbose > /etc/ufw/rules.v4
+   #+END_SRC
+
+*** Restore the Rules
+   #+BEGIN_SRC shell
+   sudo ufw --force reload
+   #+END_SRC
+
+* Difference between ufw,firewalld,iptables.
+
+| Feature                | ufw                      | firewalld                  | iptables                                  |
+|------------------------+--------------------------+----------------------------+-------------------------------------------|
+| =User Interface=         | Simple and user-friendly | Command-line and GUI tools | Command-line                              |
+| =Backend Tool=           | iptables                 | iptables                   | iptables                                  |
+| =Zone/Profile Concept=   | No                       | Yes                        | No                                        |
+| =Dynamic Rules=          | No                       | Yes                        | No                                        |
+| =Rich Rules=             | No                       | Yes                        | Yes                                       |
+| =Logging=                | Yes                      | Yes                        | Yes                                       |
+| =Application Profiles=   | Yes                      | Yes                        | No                                        |
+| =Default Policies=       | Yes                      | Yes                        | No (uses policies in chains)              |
+| =Integration with Tools= | Limited                  | D-Bus interface            | iptables can integrate with various tools |
+| =Distribution Support=   | Ubuntu, Debian           | Fedora, RHEL, CentOS       | Virtually all Linux distros               |
+
+* Samba Server
+=Samba is a free and open-source implementation of the Server Message Block (SMB) protocol, which is used for sharing files, printers, and other resources between computers on a network.=
+** File Sharing
+    Samba allows you to share files and directories between computers, regardless of their operating systems. It facilitates seamless file sharing between Windows, Linux, and macOS systems.
+    Use: You can use a Samba server to create shared folders on a Linux server, making them accessible to Windows machines as if they were regular network drives.
+*** Installation and Configutaion
+**** Download and install
+~sudo dnf install samba samba-client samba-common~
+**** Enable samba through firewall
+~sudo firewall-cmd --permanent --zone=public --add-service=samba~
+~sudo firewall-cmd --reload~
+
+**** Create a Directory for sharing
+~sudo mkdir -p /samba/apps~
+~sudo chmod 777 /samba~
+~sudo chmod 777 /samba/apps~
+~sudo touch /samba/apps/fileByServer~
+**** Config File
+~sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.bak~
+~sudo nano /etc/samba/smb.conf~
+#+BEGIN_SRC ini
+[global]
+        workgroup = SAMBA
+        netbios name = ubuntu
+        security = user
+        map to guest = bad user
+        dns proxy = no
+[Apps]
+        comment = Samba Shared Directory
+        path = /samba/apps
+        browsable = yes
+        writable = yes
+        guest ok = yes
+        guest only = yes
+        read only = no
+#+END_SRC
+**** Test the config file
+~testparm~
+**** Start the Samba server
+~sudo systemctl start smb nmb~
+**** SMB and NMB
+=SMB is a network file sharing protocol. It allows applications on a computer to read and write to files and to request services from server programs in a computer network.=
+
+=NetBIOS is an acronym for Network Basic Input/Output System. It provides services related to the session layer of the OSI model, allowing applications on separate computers to communicate over a local area network.=
+**** Client side config
+***** Linux
+~sudo apt install cifs-utils samba-client~
+~sudo mount -t cifs //<ip-addr>/Apps /path/to/mount~
+***** Windows
+On Windows file manager location bar Type
+~\\<ip-addr>~
+
+** Printer Sharing
+    Samba enables the sharing of printers over a network, allowing multiple users to print to a single printer connected to the Samba server.
+    Use: With Samba, you can set up a centralized print server that can be accessed by various devices across different platforms.
+    Link to configure: https://ubuntu.com/server/docs/samba-print-server
+** Integration with Active Directory
+    Definition: Samba supports integration with Microsoft Active Directory, enabling seamless collaboration between Linux/Unix systems and Windows environments.
+    Use: By integrating with Active Directory, Samba allows Linux servers to participate in Windows-based networks, providing a unified authentication and authorization system.
+    Link: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/windows_integration_guide/winbind
+** Cross-Platform Compatibility
+    Definition: Samba ensures interoperability between Windows, Linux, and macOS systems by implementing the SMB protocol, allowing file and print services to be shared across different platforms.
+    Use: Users can access shared resources on a Samba server using Windows Explorer, macOS Finder, or Linux file managers, fostering collaboration in heterogeneous network environments.
+** more...
+
+* Simple WebServer
+~sudo apt install apache2~
+~sudo dnf install httpd~
+~sudo nano /var/www/index.html~
+~sudo systemctl start [httpd or apache2]~
+#+BEGIN_SRC html
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Workshop - National Innovation Center, Pokhara</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #3498db;
+            padding: 20px;
+            color: #fff;
+        }
+        h2 {
+            color: #3498db;
+        }
+        section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px 0;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Linux Workshop</h1>
+        <p>National Innovation Center, Pokhara</p>
+    </header>
+    <section>
+        <h2>Event Details</h2>
+        <p>Date: 1st Marsian Day </p>
+        <p>Time: Time is relative.</p>
+        <p>Location: National Innovation Center, Pokhara</p>
+    </section>
+    <section>
+        <h2>About the Workshop</h2>
+        <p>Welcome to the Linux Workshop at the National Innovation Center in Pokhara! This workshop aims to provide hands-on experience and knowledge about Linux operating systems.</p>
+        <p>Topics Covered:</p>
+        <ul>
+            <li>Introduction to Linux</li>
+            <li>Basic Commands</li>
+            <li>File System Navigation</li>
+            <li>Permissions and Security</li>
+            <li>Practical Exercises</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Speakers</h2>
+        <p>Join us to hear from our distinguished speakers:</p>
+        <p><strong>Bibit Kunwar Chhetri</strong></p>
+        <p><strong>Satya Pr. Dahal</strong></p>
+    </section>
+    <section>
+        <h2>Registration</h2>
+        <p>To register for the workshop, please visit Mars(The Red Planet).</p>
+    </section>
+    <footer>
+        <p>Contact us at alien@mars.planet for any inquiries.</p>
+        <p>Follow us on social media: Marsbook</p>
+    </footer>
+</body>
+</html>
+
+#+END_SRC

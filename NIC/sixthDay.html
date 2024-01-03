@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-01-03 Wed 19:59 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day 10</title>
+<meta name="author" content="GCES Linux Community" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Day 10</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org8cec9ef">1. Firewalld</a>
+<ul>
+<li><a href="#orgaaa0a4f">1.1. Zone</a></li>
+<li><a href="#org61c4722">1.2. Service:</a></li>
+<li><a href="#orge81dbf5">1.3. Rich Rule:</a></li>
+<li><a href="#orgc66be7b">1.4. Permanent vs. Runtime:</a></li>
+<li><a href="#org50b3d13">1.5. Default Zone:</a></li>
+<li><a href="#orgbb695bd">1.6. Reload:</a></li>
+<li><a href="#orgc959519">1.7. Masquerade:</a></li>
+<li><a href="#org3154e51">1.8. Port Forwarding:</a></li>
+<li><a href="#orgaaa4e41">1.9. Reject vs. Drop:</a></li>
+<li><a href="#org7d15bcb">1.10. Source and Destination:</a></li>
+<li><a href="#org281b191">1.11. Logging:</a></li>
+<li><a href="#org625d18c">1.12. Interfaces:</a></li>
+<li><a href="#org2947e8a">1.13. <code>Firewalld config</code></a>
+<ul>
+<li><a href="#orga04bb71">1.13.1. Install</a></li>
+<li><a href="#org230f316">1.13.2. Start and enable service</a></li>
+</ul>
+</li>
+<li><a href="#org3ecf71c">1.14. Basic Firewalld Config</a>
+<ul>
+<li><a href="#orgb93bf39">1.14.1. List all rules</a></li>
+<li><a href="#orgca8b130">1.14.2. Drop port 22</a></li>
+<li><a href="#orgb11f815">1.14.3. Block ivp-4 address</a></li>
+<li><a href="#org056a606">1.14.4. Note: firewalld doesn't use explicit rule indexes</a></li>
+<li><a href="#org9cb5b93">1.14.5. Block All Incoming Traffic</a></li>
+<li><a href="#org9fa4028">1.14.6. Flush All Rules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orga1f9b6f">2. UFW</a>
+<ul>
+<li><a href="#orgf426fac">2.1. Listing Rules</a></li>
+<li><a href="#orgbf80766">2.2. Block Port Number</a></li>
+<li><a href="#org2a71724">2.3. Block IP Address</a></li>
+<li><a href="#org41febae">2.4. Add Rule at Specific Index</a></li>
+<li><a href="#org8ee7a4d">2.5. Block All Incoming Traffic</a></li>
+<li><a href="#org47ac558">2.6. Flush All Rules</a></li>
+<li><a href="#orgbf9b290">2.7. Save and Restore Rules</a>
+<ul>
+<li><a href="#org153b0af">2.7.1. Save the Rules</a></li>
+<li><a href="#orgcb3ac26">2.7.2. Restore the Rules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org5a7e4b6">3. Difference between ufw,firewalld,iptables.</a></li>
+<li><a href="#orgfc00f71">4. Samba Server</a>
+<ul>
+<li><a href="#org2b12cef">4.1. File Sharing</a>
+<ul>
+<li><a href="#org079c433">4.1.1. Installation and Configutaion</a></li>
+</ul>
+</li>
+<li><a href="#org5ef8841">4.2. Printer Sharing</a></li>
+<li><a href="#org544b4e7">4.3. Integration with Active Directory</a></li>
+<li><a href="#orgdec20db">4.4. Cross-Platform Compatibility</a></li>
+<li><a href="#orga8628ab">4.5. more&#x2026;</a></li>
+</ul>
+</li>
+<li><a href="#orge351976">5. Simple WebServer</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org8cec9ef" class="outline-2">
+<h2 id="org8cec9ef"><span class="section-number-2">1.</span> Firewalld</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<code>Firewalld is a dynamically managed firewall solution for Linux systems that provides a high-level interface for managing firewall rules. It is designed to be more user-friendly and flexible than traditional static firewall configurations.</code>
+</p>
+</div>
+<div id="outline-container-orgaaa0a4f" class="outline-3">
+<h3 id="orgaaa0a4f"><span class="section-number-3">1.1.</span> Zone</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+A zone is a predefined set of rules that specify the level of trust for a network or interface. Each zone has its own set of rules for incoming and outgoing traffic. Examples include public, work, home, internal, and external.
+</p>
+</div>
+</div>
+<div id="outline-container-org61c4722" class="outline-3">
+<h3 id="org61c4722"><span class="section-number-3">1.2.</span> Service:</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+A service is a predefined set of rules that define access to specific network services. For example, there are services for HTTP, HTTPS, SSH, FTP, etc. Services are associated with specific ports and protocols.
+</p>
+</div>
+</div>
+<div id="outline-container-orge81dbf5" class="outline-3">
+<h3 id="orge81dbf5"><span class="section-number-3">1.3.</span> Rich Rule:</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Rich rules provide a more flexible way to define firewall rules using a syntax that allows complex conditions. Rich rules are often used for more advanced configurations beyond the capabilities of predefined services.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc66be7b" class="outline-3">
+<h3 id="orgc66be7b"><span class="section-number-3">1.4.</span> Permanent vs. Runtime:</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Changes to the firewall configuration can be made either permanently (persist across reboots) or at runtime (applied immediately but not persisted). The &#x2013;permanent option is used for permanent changes.
+</p>
+</div>
+</div>
+<div id="outline-container-org50b3d13" class="outline-3">
+<h3 id="org50b3d13"><span class="section-number-3">1.5.</span> Default Zone:</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+The default zone is the zone assigned to network interfaces that are not explicitly configured. It determines the default behavior for incoming and outgoing traffic.
+</p>
+</div>
+</div>
+<div id="outline-container-orgbb695bd" class="outline-3">
+<h3 id="orgbb695bd"><span class="section-number-3">1.6.</span> Reload:</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+After making changes to the firewall configuration, the &#x2013;reload command is used to apply the new settings without restarting the entire firewall.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc959519" class="outline-3">
+<h3 id="orgc959519"><span class="section-number-3">1.7.</span> Masquerade:</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Masquerading is a form of Network Address Translation (NAT) that allows a network to share a single public IP address. It is often used when a local network needs to access the internet through a single external IP.
+</p>
+</div>
+</div>
+<div id="outline-container-org3154e51" class="outline-3">
+<h3 id="org3154e51"><span class="section-number-3">1.8.</span> Port Forwarding:</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Port forwarding allows incoming traffic on a specific port to be redirected to a different port or IP address. This can be useful for exposing services on internal networks to the outside world.
+</p>
+</div>
+</div>
+<div id="outline-container-orgaaa4e41" class="outline-3">
+<h3 id="orgaaa4e41"><span class="section-number-3">1.9.</span> Reject vs. Drop:</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+Reject sends an error message back to the source, indicating that the connection was not allowed. Drop simply discards the packet without sending any notification.
+</p>
+</div>
+</div>
+<div id="outline-container-org7d15bcb" class="outline-3">
+<h3 id="org7d15bcb"><span class="section-number-3">1.10.</span> Source and Destination:</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+Rules can be specified based on the source and destination addresses. Understanding how to use these parameters allows you to control traffic based on the origin or destination of packets.
+</p>
+</div>
+</div>
+<div id="outline-container-org281b191" class="outline-3">
+<h3 id="org281b191"><span class="section-number-3">1.11.</span> Logging:</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+Enabling logging for specific rules can help you monitor the firewall's activity. It allows you to see which packets are matching a particular rule.
+</p>
+</div>
+</div>
+<div id="outline-container-org625d18c" class="outline-3">
+<h3 id="org625d18c"><span class="section-number-3">1.12.</span> Interfaces:</h3>
+<div class="outline-text-3" id="text-1-12">
+<p>
+Interfaces represent network connections on your system. You can associate specific rules or zones with specific interfaces to control traffic.
+</p>
+</div>
+</div>
+<div id="outline-container-org2947e8a" class="outline-3">
+<h3 id="org2947e8a"><span class="section-number-3">1.13.</span> <code>Firewalld config</code></h3>
+<div class="outline-text-3" id="text-1-13">
+</div>
+<div id="outline-container-orga04bb71" class="outline-4">
+<h4 id="orga04bb71"><span class="section-number-4">1.13.1.</span> Install</h4>
+<div class="outline-text-4" id="text-1-13-1">
+<p>
+<code>sudo yum install firewalld</code>
+<code>sudo apt install firewalld</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org230f316" class="outline-4">
+<h4 id="org230f316"><span class="section-number-4">1.13.2.</span> Start and enable service</h4>
+<div class="outline-text-4" id="text-1-13-2">
+<p>
+<code>sudo systemctl start firewalld</code>
+<code>sudo systemctl enable firewalld</code>
+<code>sudo systemctl status firewalld</code>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3ecf71c" class="outline-3">
+<h3 id="org3ecf71c"><span class="section-number-3">1.14.</span> Basic Firewalld Config</h3>
+<div class="outline-text-3" id="text-1-14">
+</div>
+<div id="outline-container-orgb93bf39" class="outline-4">
+<h4 id="orgb93bf39"><span class="section-number-4">1.14.1.</span> List all rules</h4>
+<div class="outline-text-4" id="text-1-14-1">
+<p>
+<code>sudo firewall-cmd --list-all</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgca8b130" class="outline-4">
+<h4 id="orgca8b130"><span class="section-number-4">1.14.2.</span> Drop port 22</h4>
+<div class="outline-text-4" id="text-1-14-2">
+<p>
+<code>sudo firewall-cmd --add-rich-rule='rule family="ipv4" service name="ssh" drop'</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgb11f815" class="outline-4">
+<h4 id="orgb11f815"><span class="section-number-4">1.14.3.</span> Block ivp-4 address</h4>
+<div class="outline-text-4" id="text-1-14-3">
+<p>
+<code>sudo firewall-cmd --add-rich-rule='rule family="ipv4" source address="&lt;ip-addr&gt;" drop'</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org056a606" class="outline-4">
+<h4 id="org056a606"><span class="section-number-4">1.14.4.</span> Note: firewalld doesn't use explicit rule indexes</h4>
+</div>
+<div id="outline-container-org9cb5b93" class="outline-4">
+<h4 id="org9cb5b93"><span class="section-number-4">1.14.5.</span> Block All Incoming Traffic</h4>
+<div class="outline-text-4" id="text-1-14-5">
+<p>
+<code>sudo firewall-cmd --set-default-zone=drop</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org9fa4028" class="outline-4">
+<h4 id="org9fa4028"><span class="section-number-4">1.14.6.</span> Flush All Rules</h4>
+<div class="outline-text-4" id="text-1-14-6">
+<p>
+<code>sudo firewall-cmd --complete-reload</code>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga1f9b6f" class="outline-2">
+<h2 id="orga1f9b6f"><span class="section-number-2">2.</span> UFW</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<code>ufw stands for Uncomplicated Firewall. It is a user-friendly command-line interface for managing iptables, the default firewall management tool in many Linux distributions. ufw aims to simplify the process of configuring a firewall, making it more accessible to users who may not be familiar with iptables syntax.</code>
+</p>
+</div>
+<div id="outline-container-orgf426fac" class="outline-3">
+<h3 id="orgf426fac"><span class="section-number-3">2.1.</span> Listing Rules</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-shell">sudo ufw status verbose
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbf80766" class="outline-3">
+<h3 id="orgbf80766"><span class="section-number-3">2.2.</span> Block Port Number</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+<pre class="src src-shell">sudo ufw deny 22
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2a71724" class="outline-3">
+<h3 id="org2a71724"><span class="section-number-3">2.3.</span> Block IP Address</h3>
+<div class="outline-text-3" id="text-2-3">
+<div class="org-src-container">
+<pre class="src src-shell">sudo ufw deny from &lt;ip-addr&gt;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org41febae" class="outline-3">
+<h3 id="org41febae"><span class="section-number-3">2.4.</span> Add Rule at Specific Index</h3>
+<div class="outline-text-3" id="text-2-4">
+<div class="org-src-container">
+<pre class="src src-shell">sudo ufw insert 1 allow from &lt;ip-addr&gt; to any app OpenSSH
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8ee7a4d" class="outline-3">
+<h3 id="org8ee7a4d"><span class="section-number-3">2.5.</span> Block All Incoming Traffic</h3>
+<div class="outline-text-3" id="text-2-5">
+<div class="org-src-container">
+<pre class="src src-shell">sudo ufw default deny incoming
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org47ac558" class="outline-3">
+<h3 id="org47ac558"><span class="section-number-3">2.6.</span> Flush All Rules</h3>
+<div class="outline-text-3" id="text-2-6">
+<div class="org-src-container">
+<pre class="src src-shell">sudo ufw reset
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbf9b290" class="outline-3">
+<h3 id="orgbf9b290"><span class="section-number-3">2.7.</span> Save and Restore Rules</h3>
+<div class="outline-text-3" id="text-2-7">
+</div>
+<div id="outline-container-org153b0af" class="outline-4">
+<h4 id="org153b0af"><span class="section-number-4">2.7.1.</span> Save the Rules</h4>
+<div class="outline-text-4" id="text-2-7-1">
+<div class="org-src-container">
+<pre class="src src-shell">sudo ufw status verbose &gt; /etc/ufw/rules.v4
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcb3ac26" class="outline-4">
+<h4 id="orgcb3ac26"><span class="section-number-4">2.7.2.</span> Restore the Rules</h4>
+<div class="outline-text-4" id="text-2-7-2">
+<div class="org-src-container">
+<pre class="src src-shell">sudo ufw --force reload
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a7e4b6" class="outline-2">
+<h2 id="org5a7e4b6"><span class="section-number-2">3.</span> Difference between ufw,firewalld,iptables.</h2>
+<div class="outline-text-2" id="text-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Feature</th>
+<th scope="col" class="org-left">ufw</th>
+<th scope="col" class="org-left">firewalld</th>
+<th scope="col" class="org-left">iptables</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>User Interface</code></td>
+<td class="org-left">Simple and user-friendly</td>
+<td class="org-left">Command-line and GUI tools</td>
+<td class="org-left">Command-line</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Backend Tool</code></td>
+<td class="org-left">iptables</td>
+<td class="org-left">iptables</td>
+<td class="org-left">iptables</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Zone/Profile Concept</code></td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">No</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Dynamic Rules</code></td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">No</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Rich Rules</code></td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Logging</code></td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Application Profiles</code></td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+<td class="org-left">No</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Default Policies</code></td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+<td class="org-left">No (uses policies in chains)</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Integration with Tools</code></td>
+<td class="org-left">Limited</td>
+<td class="org-left">D-Bus interface</td>
+<td class="org-left">iptables can integrate with various tools</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>Distribution Support</code></td>
+<td class="org-left">Ubuntu, Debian</td>
+<td class="org-left">Fedora, RHEL, CentOS</td>
+<td class="org-left">Virtually all Linux distros</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgfc00f71" class="outline-2">
+<h2 id="orgfc00f71"><span class="section-number-2">4.</span> Samba Server</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<code>Samba is a free and open-source implementation of the Server Message Block (SMB) protocol, which is used for sharing files, printers, and other resources between computers on a network.</code>
+</p>
+</div>
+<div id="outline-container-org2b12cef" class="outline-3">
+<h3 id="org2b12cef"><span class="section-number-3">4.1.</span> File Sharing</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Samba allows you to share files and directories between computers, regardless of their operating systems. It facilitates seamless file sharing between Windows, Linux, and macOS systems.
+Use: You can use a Samba server to create shared folders on a Linux server, making them accessible to Windows machines as if they were regular network drives.
+</p>
+</div>
+<div id="outline-container-org079c433" class="outline-4">
+<h4 id="org079c433"><span class="section-number-4">4.1.1.</span> Installation and Configutaion</h4>
+<div class="outline-text-4" id="text-4-1-1">
+</div>
+<ol class="org-ol">
+<li><a id="org51cf442"></a>Download and install<br />
+<div class="outline-text-5" id="text-4-1-1-1">
+<p>
+<code>sudo dnf install samba samba-client samba-common</code>
+</p>
+</div>
+</li>
+<li><a id="orga9f8acf"></a>Enable samba through firewall<br />
+<div class="outline-text-5" id="text-4-1-1-2">
+<p>
+<code>sudo firewall-cmd --permanent --zone=public --add-service=samba</code>
+<code>sudo firewall-cmd --reload</code>
+</p>
+</div>
+</li>
+
+<li><a id="org999ad59"></a>Create a Directory for sharing<br />
+<div class="outline-text-5" id="text-4-1-1-3">
+<p>
+<code>sudo mkdir -p /samba/apps</code>
+<code>sudo chmod 777 /samba</code>
+<code>sudo chmod 777 /samba/apps</code>
+<code>sudo touch /samba/apps/fileByServer</code>
+</p>
+</div>
+</li>
+<li><a id="org9039f0b"></a>Config File<br />
+<div class="outline-text-5" id="text-4-1-1-4">
+<p>
+<code>sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.bak</code>
+<code>sudo nano /etc/samba/smb.conf</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-ini">[global]
+        workgroup = SAMBA
+        netbios name = ubuntu
+        security = user
+        map to guest = bad user
+        dns proxy = no
+[Apps]
+        comment = Samba Shared Directory
+        path = /samba/apps
+        browsable = yes
+        writable = yes
+        guest ok = yes
+        guest only = yes
+        read only = no
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org21a6a0f"></a>Test the config file<br />
+<div class="outline-text-5" id="text-4-1-1-5">
+<p>
+<code>testparm</code>
+</p>
+</div>
+</li>
+<li><a id="org58e7fc6"></a>Start the Samba server<br />
+<div class="outline-text-5" id="text-4-1-1-6">
+<p>
+<code>sudo systemctl start smb nmb</code>
+</p>
+</div>
+</li>
+<li><a id="orga311819"></a>SMB and NMB<br />
+<div class="outline-text-5" id="text-4-1-1-7">
+<p>
+<code>SMB is a network file sharing protocol. It allows applications on a computer to read and write to files and to request services from server programs in a computer network.</code>
+</p>
+
+<p>
+<code>NetBIOS is an acronym for Network Basic Input/Output System. It provides services related to the session layer of the OSI model, allowing applications on separate computers to communicate over a local area network.</code>
+</p>
+</div>
+</li>
+<li><a id="org4b2fc32"></a>Client side config<br />
+<ol class="org-ol">
+<li><a id="org61dc3b0"></a>Linux<br />
+<div class="outline-text-6" id="text-4-1-1-8-1">
+<p>
+<code>sudo apt install cifs-utils samba-client</code>
+<code>sudo mount -t cifs //&lt;ip-addr&gt;/Apps /path/to/mount</code>
+</p>
+</div>
+</li>
+<li><a id="org798d696"></a>Windows<br />
+<div class="outline-text-6" id="text-4-1-1-8-2">
+<p>
+On Windows file manager location bar Type
+<code>\\&lt;ip-addr&gt;</code>
+</p>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org5ef8841" class="outline-3">
+<h3 id="org5ef8841"><span class="section-number-3">4.2.</span> Printer Sharing</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Samba enables the sharing of printers over a network, allowing multiple users to print to a single printer connected to the Samba server.
+Use: With Samba, you can set up a centralized print server that can be accessed by various devices across different platforms.
+Link to configure: <a href="https://ubuntu.com/server/docs/samba-print-server">https://ubuntu.com/server/docs/samba-print-server</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org544b4e7" class="outline-3">
+<h3 id="org544b4e7"><span class="section-number-3">4.3.</span> Integration with Active Directory</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Definition: Samba supports integration with Microsoft Active Directory, enabling seamless collaboration between Linux/Unix systems and Windows environments.
+Use: By integrating with Active Directory, Samba allows Linux servers to participate in Windows-based networks, providing a unified authentication and authorization system.
+Link: <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/windows_integration_guide/winbind">https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/windows_integration_guide/winbind</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgdec20db" class="outline-3">
+<h3 id="orgdec20db"><span class="section-number-3">4.4.</span> Cross-Platform Compatibility</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+Definition: Samba ensures interoperability between Windows, Linux, and macOS systems by implementing the SMB protocol, allowing file and print services to be shared across different platforms.
+Use: Users can access shared resources on a Samba server using Windows Explorer, macOS Finder, or Linux file managers, fostering collaboration in heterogeneous network environments.
+</p>
+</div>
+</div>
+<div id="outline-container-orga8628ab" class="outline-3">
+<h3 id="orga8628ab"><span class="section-number-3">4.5.</span> more&#x2026;</h3>
+</div>
+</div>
+
+<div id="outline-container-orge351976" class="outline-2">
+<h2 id="orge351976"><span class="section-number-2">5.</span> Simple WebServer</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+<code>sudo apt install apache2</code>
+<code>sudo dnf install httpd</code>
+<code>sudo nano /var/www/index.html</code>
+<code>sudo systemctl start [httpd or apache2]</code>
+</p>
+<div class="org-src-container">
+<pre class="src src-html">  &lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Linux Workshop - National Innovation Center, Pokhara&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        header {
+            background-color: #3498db;
+            padding: 20px;
+            color: #fff;
+        }
+        h2 {
+            color: #3498db;
+        }
+        section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px 0;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Linux Workshop&lt;/h1&gt;
+        &lt;p&gt;National Innovation Center, Pokhara&lt;/p&gt;
+    &lt;/header&gt;
+    &lt;section&gt;
+        &lt;h2&gt;Event Details&lt;/h2&gt;
+        &lt;p&gt;Date: 1st Marsian Day &lt;/p&gt;
+        &lt;p&gt;Time: Time is relative.&lt;/p&gt;
+        &lt;p&gt;Location: National Innovation Center, Pokhara&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+        &lt;h2&gt;About the Workshop&lt;/h2&gt;
+        &lt;p&gt;Welcome to the Linux Workshop at the National Innovation Center in Pokhara! This workshop aims to provide hands-on experience and knowledge about Linux operating systems.&lt;/p&gt;
+        &lt;p&gt;Topics Covered:&lt;/p&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Introduction to Linux&lt;/li&gt;
+            &lt;li&gt;Basic Commands&lt;/li&gt;
+            &lt;li&gt;File System Navigation&lt;/li&gt;
+            &lt;li&gt;Permissions and Security&lt;/li&gt;
+            &lt;li&gt;Practical Exercises&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+        &lt;h2&gt;Speakers&lt;/h2&gt;
+        &lt;p&gt;Join us to hear from our distinguished speakers:&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;Bibit Kunwar Chhetri&lt;/strong&gt;&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;Satya Pr. Dahal&lt;/strong&gt;&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+        &lt;h2&gt;Registration&lt;/h2&gt;
+        &lt;p&gt;To register for the workshop, please visit Mars(The Red Planet).&lt;/p&gt;
+    &lt;/section&gt;
+    &lt;footer&gt;
+        &lt;p&gt;Contact us at alien@mars.planet for any inquiries.&lt;/p&gt;
+        &lt;p&gt;Follow us on social media: Marsbook&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2024-01-03 Wed</p>
+<p class="author">Author: GCES Linux Community</p>
+<p class="date">Created: 2024-01-03 Wed 19:59</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
