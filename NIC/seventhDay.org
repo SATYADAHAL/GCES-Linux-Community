@@ -1,0 +1,220 @@
+#+DATE: 2024-01-04 Thu
+#+AUTHOR: GCES Linux Community
+#+TITLE: Day 11
+#+HOURS: 1:30 hour
+#+CREATOR: GCES Linux Community
+#+LANGUAGE: en
+
+* Vi and Vim
+=Vi and Vim are powerful text editors with a variety of commands and shortcuts.
+=In Vim, there are different modes, each serving a specific purpose. Understanding these modes is crucial for effective text editing.=
+** Normal Mode:
+    This is the default mode when you start Vim.
+    Used for navigation, manipulation, and issuing commands.
+    Commands include navigation (h, j, k, l), deletion (d), copy/yank (y), paste (p), undo (u), redo (Ctrl + r), and more.
+    Pressing Esc returns you to normal mode from other modes.
+** Insert Mode:
+    Entered by pressing i in normal mode.
+    Used for inserting and editing text.
+    Press Esc to return to normal mode.
+** Visual Mode:
+    Entered by pressing v in normal mode.
+    Used for selecting text. You can also use V for line-wise selection and Ctrl + v for block-wise selection.
+    Once text is selected, you can copy (y), cut (d), or replace the selection.
+** Few Shortcuts in vim
+*** Navigation:
+    =h, j, k, l: Move the cursor left, down, up, and right, respectively.=
+    =w: Move forward one word.=
+    =b: Move backward one word.=
+    =0: Move to the beginning of the line.=
+    =$: Move to the end of the line.=
+    =gg: Move to the beginning of the file.=
+    =G: Move to the end of the file.=
+    =Ctrl + U: Move half a page up.=
+    =Ctrl + D: Move half a page down.=
+*** Editing:
+    =i: Enter insert mode before the cursor.=
+    =I: Enter insert mode at the beginning of the line.=
+    =a: Enter insert mode after the cursor.=
+    =A: Enter insert mode at the end of the line.=
+    =o: Open a new line below the current line and enter insert mode.=
+    =O: Open a new line above the current line and enter insert mode.=
+    =Esc: Exit insert mode.=
+*** Saving and Exiting:
+    =:w: Save the file.=
+    =:q: Quit (exit) if no changes have been made.=
+    =:q!: Quit without saving changes.=
+    =:wq: Save and quit.=
+    =ZZ: Save and quit (in normal mode).=
+
+* RPM (Red Hat Package Manager)
+** Introduction
+   - RPM (Red Hat Package Manager) is a powerful tool for package management in Linux.
+   - Essential for system administrators to manage software installations, upgrades, and removals.
+
+** Basic RPM Commands
+   - ~rpm -ivh package.rpm~
+     - Install a package.
+     - =-i=: Install, =-v=: Verbose, =-h=: Hash marks during installation.
+   - ~rpm -Uvh package.rpm~
+     - Upgrade a package.
+     - =-U=: Upgrade.
+   - ~rpm -e package_name~
+     - Uninstall or erase a package.
+     - =-e=: Erase.
+
+** Package Information and Querying
+
+   - ~rpm -qa~
+     - List all installed packages.
+
+   - ~rpm -qi package_name~
+     - Display detailed information about an installed package.
+
+   - ~rpm -q package_name~
+     - Check if a specific package is installed.
+
+** Package Management
+
+   - ~rpm -ql package_name~
+     - List files installed by a package.
+
+   - ~rpm -V package_name~
+     - Verify the integrity of installed files.
+
+   - ~rpm -qR package_name~
+     - List runtime dependencies for a package.
+
+** Package Groups and Dependencies
+   - =yum groupinstall "Group Name"=
+     - Install a group of related packages.
+   - =rpm -qf /path/to/file=
+     - Find which package provides a specific file.
+** References
+   - [RPM Documentation](https://www.rpm.org/documentation.html)
+
+* ANSI Escape Sequences
+=Escape sequences in ANSI format consist of standardized codes that begin with the Escape character.
+The Escape character can be represented in various ways=
+*1. Ctrl-Key (^[)*
+*2. Octal (\033)*
+*3. Unicode (\u001b)*
+*4. Hexadecimal (\x1b)* 
+=These codes are followed by a command, often separated by an opening square bracket ([), forming a Control Sequence Introducer (CSI). Additionally, arguments may follow the CSI, separated by semicolons (;).=
+** Examples
+#+BEGIN_SRC bash
+echo -e "\033[32mGreen Text\033[0m"   
+echo -e "\033[1mBold Text\033[0m"   
+echo -e "\033[1;32mBold Green Text\033[0m"   
+echo -e "\033[31;44mBlue Background with Red Text\033[0m"
+#+END_SRC
+
+* Environment Variables in Linux
+** Viewing Environment Variables
+   - To view the currently set environment variables, you can use the ~env~ or ~printenv~ command.
+     #+BEGIN_SRC bash
+     env
+     # or
+     printenv
+     #+END_SRC
+
+** Setting Environment Variables
+
+   - You can set environment variables using the `export` command in the terminal. For example:
+     #+BEGIN_SRC bash
+     export MY_VARIABLE="Hello, World!"
+     #+END_SRC
+
+** Persistent Environment Variables
+
+   - If you want an environment variable to be available every time you open a new terminal session, you can add the `export` command to your shell configuration file (e.g., `~/.bashrc`, `~/.bash_profile`, or `~/.zshrc`).
+     #+BEGIN_SRC bash
+     echo 'export MY_VARIABLE="Hello, World!"' >> ~/.bashrc
+     source ~/.bashrc
+     #+END_SRC
+
+** Accessing Environment Variables in Scripts
+
+   - In shell scripts or programs, you can access environment variables using the syntax `$VARIABLE_NAME`. For example:
+     #+BEGIN_SRC bash
+     echo $MY_VARIABLE
+     #+END_SRC
+
+** Common Environment Variables
+
+   - Some environment variables are commonly used by the system or applications. Examples include `PATH` (specifies directories to search for executable files), `HOME` (user's home directory), and `USER` (current user's username).
+
+** Unsetting Environment Variables
+
+   - To unset (remove) an environment variable, you can use the `unset` command.
+     #+BEGIN_SRC bash
+     unset MY_VARIABLE
+     #+END_SRC
+
+** Default Environment Variables
+
+   - When a new shell session is started, it inherits environment variables from its parent process. Some variables are set by default and are available to all processes.
+
+** System-wide Environment Variables
+   - System-wide environment variables are often set in configuration files located in `/etc`. These affect all users on the system.
+
+** Special Environment Variables
+   - Some environment variables have special meanings, such as `PWD` (current working directory) and `SHELL` (default shell).
+
+* Linux Log
+** What is log?
+=A record or entry of events, actions, or messages that are generated by software, hardware, or systems during their operation. Logs are essential for monitoring, troubleshooting, and maintaining systems.=
+** System Logs
+    Syslog: =/var/log/syslog= or =/var/log/messages=
+    Journalctl (systemd): ~journalctl~
+** Authentication Logs
+    Auth.log (Debian/Ubuntu): /var/log/auth.log
+    Secure (RHEL/CentOS): /var/log/secure
+** Kernel Logs
+    Kern.log: /var/log/kern.log
+    dmesg: ~dmesg~
+** Application Logs
+    Apache log Directory: /var/log/httpd or /var/log/apache
+    Apache Access Log: /var/log/apache2/access.log
+    Apache Error Log: /var/log/apache2/error.log
+    MySQL Log: /var/log/mysql/error.log or /var/log/mysqld.log
+    PostgreSQL Log: /var/log/postgresql/postgresql.log
+    =Application-Specific Logs: Varies by application, often found in /var/log or /var/log/<application-name>.=
+** Security Logs
+    Audit Log (auditd): /var/log/audit/audit.log
+** Mail Logs
+    Mail.log (Postfix): /var/log/mail.log
+    Mail.log (Exim): /var/log/exim4/mainlog
+    Mail.log (Sendmail): /var/log/maillog
+** Firewall Logs:
+    Firewalld Log: /var/log/firewalld
+    UFW Log: /var/log/ufw.log
+    iptables Log: /var/log/iptables.log
+** Package Management Logs:
+    dpkg.log (Debian/Ubuntu): /var/log/dpkg.log
+    yum.log (RHEL/CentOS): /var/log/yum.log
+** Custom Application Logs:
+    Varies by application; check the application's documentation or configuration for log locations.
+
+* Tmux
+tmux is a terminal multiplexer for Unix-like operating systems. It allows you to create multiple terminal sessions within a single terminal window or SSH session. With tmux, you can split your terminal into multiple panes, each displaying its own command line interface or running different commands simultaneously. Additionally, tmux supports detachable sessions, which means you can start a session, disconnect from it, and later reattach to the same session, keeping your work intact.
+** Keybinding in Tmux
+*** Prefix Key:
+    The default prefix key is ~Ctrl-b~. It means you press ~Ctrl-b~ first and then another key for a specific action.
+*** Sessions:
+    Create a new session: ~Ctrl-b + :~, then type new-session and press Enter.
+    Switch between sessions: ~Ctrl-b + (~, then type the session index or use arrow keys.
+    Detach from session: ~Ctrl-b + d~.
+    List sessions: ~Ctrl-b + s~.
+*** Windows:
+    Create a new window: ~Ctrl-b + c~.
+    Switch between windows: ~Ctrl-b + 0-9~ (window index) or Ctrl-b + n (next) or Ctrl-b + p (previous).
+    Close the current window: ~Ctrl-b + &~.
+    Rename the current window: ~Ctrl-b + ,~.
+*** Panes:
+    Split horizontally: ~Ctrl-b + %~.
+    Split vertically: ~Ctrl-b + "~
+    Navigate between panes: ~Ctrl-b + arrow keys~.
+    Resize panes: ~Ctrl-b + Alt + arrow keys~.
+    Zoom into a pane: ~Ctrl-b + z~.
+    Close the current pane: ~Ctrl-b + x~.

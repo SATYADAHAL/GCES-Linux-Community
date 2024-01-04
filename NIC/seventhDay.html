@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-01-04 Thu 19:50 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day 11</title>
+<meta name="author" content="GCES Linux Community" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Day 11</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0cc3e18">1. Vi and Vim</a>
+<ul>
+<li><a href="#orgc1ef5fa">1.1. Normal Mode:</a></li>
+<li><a href="#orgcd973a2">1.2. Insert Mode:</a></li>
+<li><a href="#org35f63ae">1.3. Visual Mode:</a></li>
+<li><a href="#orgb7a7dcb">1.4. Few Shortcuts in vim</a>
+<ul>
+<li><a href="#orgf5b7090">1.4.1. Navigation:</a></li>
+<li><a href="#org17c7507">1.4.2. Editing:</a></li>
+<li><a href="#org1811b9e">1.4.3. Saving and Exiting:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org00121b7">2. RPM (Red Hat Package Manager)</a>
+<ul>
+<li><a href="#org622cab0">2.1. Introduction</a></li>
+<li><a href="#org205bf10">2.2. Basic RPM Commands</a></li>
+<li><a href="#org676d33d">2.3. Package Information and Querying</a></li>
+<li><a href="#orgd83e365">2.4. Package Management</a></li>
+<li><a href="#org253c8eb">2.5. Package Groups and Dependencies</a></li>
+<li><a href="#org094ee2c">2.6. References</a></li>
+</ul>
+</li>
+<li><a href="#orgc9ca659">3. ANSI Escape Sequences</a>
+<ul>
+<li><a href="#org9497f27">3.1. Examples</a></li>
+</ul>
+</li>
+<li><a href="#orgb69dd78">4. Environment Variables in Linux</a>
+<ul>
+<li><a href="#orgf8df1ff">4.1. Viewing Environment Variables</a></li>
+<li><a href="#org25ae01f">4.2. Setting Environment Variables</a></li>
+<li><a href="#orga69a678">4.3. Persistent Environment Variables</a></li>
+<li><a href="#orga321903">4.4. Accessing Environment Variables in Scripts</a></li>
+<li><a href="#org9fcf128">4.5. Common Environment Variables</a></li>
+<li><a href="#orgca42533">4.6. Unsetting Environment Variables</a></li>
+<li><a href="#org33fbdaa">4.7. Default Environment Variables</a></li>
+<li><a href="#orgf648fd5">4.8. System-wide Environment Variables</a></li>
+<li><a href="#org7a41d2f">4.9. Special Environment Variables</a></li>
+</ul>
+</li>
+<li><a href="#orgc2ba9e1">5. Linux Log</a>
+<ul>
+<li><a href="#org379f186">5.1. What is log?</a></li>
+<li><a href="#org78b68cb">5.2. System Logs</a></li>
+<li><a href="#orgced23f8">5.3. Authentication Logs</a></li>
+<li><a href="#org2c1b7c3">5.4. Kernel Logs</a></li>
+<li><a href="#org59af517">5.5. Application Logs</a></li>
+<li><a href="#orgb61549c">5.6. Security Logs</a></li>
+<li><a href="#org70134f8">5.7. Mail Logs</a></li>
+<li><a href="#org5db84a8">5.8. Firewall Logs:</a></li>
+<li><a href="#org2390bd6">5.9. Package Management Logs:</a></li>
+<li><a href="#org14c985c">5.10. Custom Application Logs:</a></li>
+</ul>
+</li>
+<li><a href="#org82aec5e">6. Tmux</a>
+<ul>
+<li><a href="#org5413362">6.1. Keybinding in Tmux</a>
+<ul>
+<li><a href="#org2cc2df1">6.1.1. Prefix Key:</a></li>
+<li><a href="#org38d19c1">6.1.2. Sessions:</a></li>
+<li><a href="#orgc02ea65">6.1.3. Windows:</a></li>
+<li><a href="#org4da6201">6.1.4. Panes:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0cc3e18" class="outline-2">
+<h2 id="org0cc3e18"><span class="section-number-2">1.</span> Vi and Vim</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<code>Vi and Vim are powerful text editors with a variety of commands and shortcuts.
+=In Vim, there are different modes, each serving a specific purpose. Understanding these modes is crucial for effective text editing.</code>
+</p>
+</div>
+<div id="outline-container-orgc1ef5fa" class="outline-3">
+<h3 id="orgc1ef5fa"><span class="section-number-3">1.1.</span> Normal Mode:</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+This is the default mode when you start Vim.
+Used for navigation, manipulation, and issuing commands.
+Commands include navigation (h, j, k, l), deletion (d), copy/yank (y), paste (p), undo (u), redo (Ctrl + r), and more.
+Pressing Esc returns you to normal mode from other modes.
+</p>
+</div>
+</div>
+<div id="outline-container-orgcd973a2" class="outline-3">
+<h3 id="orgcd973a2"><span class="section-number-3">1.2.</span> Insert Mode:</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Entered by pressing i in normal mode.
+Used for inserting and editing text.
+Press Esc to return to normal mode.
+</p>
+</div>
+</div>
+<div id="outline-container-org35f63ae" class="outline-3">
+<h3 id="org35f63ae"><span class="section-number-3">1.3.</span> Visual Mode:</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Entered by pressing v in normal mode.
+Used for selecting text. You can also use V for line-wise selection and Ctrl + v for block-wise selection.
+Once text is selected, you can copy (y), cut (d), or replace the selection.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb7a7dcb" class="outline-3">
+<h3 id="orgb7a7dcb"><span class="section-number-3">1.4.</span> Few Shortcuts in vim</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-orgf5b7090" class="outline-4">
+<h4 id="orgf5b7090"><span class="section-number-4">1.4.1.</span> Navigation:</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+<code>h, j, k, l: Move the cursor left, down, up, and right, respectively.</code>
+<code>w: Move forward one word.</code>
+<code>b: Move backward one word.</code>
+<code>0: Move to the beginning of the line.</code>
+<code>$: Move to the end of the line.</code>
+<code>gg: Move to the beginning of the file.</code>
+<code>G: Move to the end of the file.</code>
+<code>Ctrl + U: Move half a page up.</code>
+<code>Ctrl + D: Move half a page down.</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org17c7507" class="outline-4">
+<h4 id="org17c7507"><span class="section-number-4">1.4.2.</span> Editing:</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+<code>i: Enter insert mode before the cursor.</code>
+<code>I: Enter insert mode at the beginning of the line.</code>
+<code>a: Enter insert mode after the cursor.</code>
+<code>A: Enter insert mode at the end of the line.</code>
+<code>o: Open a new line below the current line and enter insert mode.</code>
+<code>O: Open a new line above the current line and enter insert mode.</code>
+<code>Esc: Exit insert mode.</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org1811b9e" class="outline-4">
+<h4 id="org1811b9e"><span class="section-number-4">1.4.3.</span> Saving and Exiting:</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+<code>:w: Save the file.</code>
+<code>:q: Quit (exit) if no changes have been made.</code>
+<code>:q!: Quit without saving changes.</code>
+<code>:wq: Save and quit.</code>
+<code>ZZ: Save and quit (in normal mode).</code>
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org00121b7" class="outline-2">
+<h2 id="org00121b7"><span class="section-number-2">2.</span> RPM (Red Hat Package Manager)</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org622cab0" class="outline-3">
+<h3 id="org622cab0"><span class="section-number-3">2.1.</span> Introduction</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>RPM (Red Hat Package Manager) is a powerful tool for package management in Linux.</li>
+<li>Essential for system administrators to manage software installations, upgrades, and removals.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org205bf10" class="outline-3">
+<h3 id="org205bf10"><span class="section-number-3">2.2.</span> Basic RPM Commands</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li><code>rpm -ivh package.rpm</code>
+<ul class="org-ul">
+<li>Install a package.</li>
+<li><code>-i</code>: Install, <code>-v</code>: Verbose, <code>-h</code>: Hash marks during installation.</li>
+</ul></li>
+<li><code>rpm -Uvh package.rpm</code>
+<ul class="org-ul">
+<li>Upgrade a package.</li>
+<li><code>-U</code>: Upgrade.</li>
+</ul></li>
+<li><code>rpm -e package_name</code>
+<ul class="org-ul">
+<li>Uninstall or erase a package.</li>
+<li><code>-e</code>: Erase.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org676d33d" class="outline-3">
+<h3 id="org676d33d"><span class="section-number-3">2.3.</span> Package Information and Querying</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li><code>rpm -qa</code>
+<ul class="org-ul">
+<li>List all installed packages.</li>
+</ul></li>
+
+<li><code>rpm -qi package_name</code>
+<ul class="org-ul">
+<li>Display detailed information about an installed package.</li>
+</ul></li>
+
+<li><code>rpm -q package_name</code>
+<ul class="org-ul">
+<li>Check if a specific package is installed.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd83e365" class="outline-3">
+<h3 id="orgd83e365"><span class="section-number-3">2.4.</span> Package Management</h3>
+<div class="outline-text-3" id="text-2-4">
+<ul class="org-ul">
+<li><code>rpm -ql package_name</code>
+<ul class="org-ul">
+<li>List files installed by a package.</li>
+</ul></li>
+
+<li><code>rpm -V package_name</code>
+<ul class="org-ul">
+<li>Verify the integrity of installed files.</li>
+</ul></li>
+
+<li><code>rpm -qR package_name</code>
+<ul class="org-ul">
+<li>List runtime dependencies for a package.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org253c8eb" class="outline-3">
+<h3 id="org253c8eb"><span class="section-number-3">2.5.</span> Package Groups and Dependencies</h3>
+<div class="outline-text-3" id="text-2-5">
+<ul class="org-ul">
+<li><code>yum groupinstall "Group Name"</code>
+<ul class="org-ul">
+<li>Install a group of related packages.</li>
+</ul></li>
+<li><code>rpm -qf /path/to/file</code>
+<ul class="org-ul">
+<li>Find which package provides a specific file.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org094ee2c" class="outline-3">
+<h3 id="org094ee2c"><span class="section-number-3">2.6.</span> References</h3>
+<div class="outline-text-3" id="text-2-6">
+<ul class="org-ul">
+<li>[RPM Documentation](<a href="https://www.rpm.org/documentation.html">https://www.rpm.org/documentation.html</a>)</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc9ca659" class="outline-2">
+<h2 id="orgc9ca659"><span class="section-number-2">3.</span> ANSI Escape Sequences</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<code>Escape sequences in ANSI format consist of standardized codes that begin with the Escape character.
+The Escape character can be represented in various ways</code>
+<b>1. Ctrl-Key (^[)</b>
+<b>2. Octal (\033)</b>
+<b>3. Unicode (\u001b)</b>
+<b>4. Hexadecimal (\x1b)</b> 
+<code>These codes are followed by a command, often separated by an opening square bracket ([), forming a Control Sequence Introducer (CSI). Additionally, arguments may follow the CSI, separated by semicolons (;).</code>
+</p>
+</div>
+<div id="outline-container-org9497f27" class="outline-3">
+<h3 id="org9497f27"><span class="section-number-3">3.1.</span> Examples</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+<pre class="src src-bash">echo -e "\033[32mGreen Text\033[0m"   
+echo -e "\033[1mBold Text\033[0m"   
+echo -e "\033[1;32mBold Green Text\033[0m"   
+echo -e "\033[31;44mBlue Background with Red Text\033[0m"
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb69dd78" class="outline-2">
+<h2 id="orgb69dd78"><span class="section-number-2">4.</span> Environment Variables in Linux</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgf8df1ff" class="outline-3">
+<h3 id="orgf8df1ff"><span class="section-number-3">4.1.</span> Viewing Environment Variables</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li><p>
+To view the currently set environment variables, you can use the <code>env</code> or <code>printenv</code> command.
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">env
+# or
+printenv
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org25ae01f" class="outline-3">
+<h3 id="org25ae01f"><span class="section-number-3">4.2.</span> Setting Environment Variables</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li><p>
+You can set environment variables using the `export` command in the terminal. For example:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">export MY_VARIABLE="Hello, World!"
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga69a678" class="outline-3">
+<h3 id="orga69a678"><span class="section-number-3">4.3.</span> Persistent Environment Variables</h3>
+<div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li><p>
+If you want an environment variable to be available every time you open a new terminal session, you can add the `export` command to your shell configuration file (e.g., `~/.bashrc`, `~/.bash<sub>profile</sub>`, or `~/.zshrc`).
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">echo 'export MY_VARIABLE="Hello, World!"' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga321903" class="outline-3">
+<h3 id="orga321903"><span class="section-number-3">4.4.</span> Accessing Environment Variables in Scripts</h3>
+<div class="outline-text-3" id="text-4-4">
+<ul class="org-ul">
+<li><p>
+In shell scripts or programs, you can access environment variables using the syntax `$VARIABLE<sub>NAME</sub>`. For example:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">echo $MY_VARIABLE
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9fcf128" class="outline-3">
+<h3 id="org9fcf128"><span class="section-number-3">4.5.</span> Common Environment Variables</h3>
+<div class="outline-text-3" id="text-4-5">
+<ul class="org-ul">
+<li>Some environment variables are commonly used by the system or applications. Examples include `PATH` (specifies directories to search for executable files), `HOME` (user's home directory), and `USER` (current user's username).</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgca42533" class="outline-3">
+<h3 id="orgca42533"><span class="section-number-3">4.6.</span> Unsetting Environment Variables</h3>
+<div class="outline-text-3" id="text-4-6">
+<ul class="org-ul">
+<li><p>
+To unset (remove) an environment variable, you can use the `unset` command.
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">unset MY_VARIABLE
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org33fbdaa" class="outline-3">
+<h3 id="org33fbdaa"><span class="section-number-3">4.7.</span> Default Environment Variables</h3>
+<div class="outline-text-3" id="text-4-7">
+<ul class="org-ul">
+<li>When a new shell session is started, it inherits environment variables from its parent process. Some variables are set by default and are available to all processes.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf648fd5" class="outline-3">
+<h3 id="orgf648fd5"><span class="section-number-3">4.8.</span> System-wide Environment Variables</h3>
+<div class="outline-text-3" id="text-4-8">
+<ul class="org-ul">
+<li>System-wide environment variables are often set in configuration files located in `/etc`. These affect all users on the system.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7a41d2f" class="outline-3">
+<h3 id="org7a41d2f"><span class="section-number-3">4.9.</span> Special Environment Variables</h3>
+<div class="outline-text-3" id="text-4-9">
+<ul class="org-ul">
+<li>Some environment variables have special meanings, such as `PWD` (current working directory) and `SHELL` (default shell).</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc2ba9e1" class="outline-2">
+<h2 id="orgc2ba9e1"><span class="section-number-2">5.</span> Linux Log</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org379f186" class="outline-3">
+<h3 id="org379f186"><span class="section-number-3">5.1.</span> What is log?</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+<code>A record or entry of events, actions, or messages that are generated by software, hardware, or systems during their operation. Logs are essential for monitoring, troubleshooting, and maintaining systems.</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org78b68cb" class="outline-3">
+<h3 id="org78b68cb"><span class="section-number-3">5.2.</span> System Logs</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Syslog: <code>/var/log/syslog</code> or <code>/var/log/messages</code>
+Journalctl (systemd): <code>journalctl</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgced23f8" class="outline-3">
+<h3 id="orgced23f8"><span class="section-number-3">5.3.</span> Authentication Logs</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+Auth.log (Debian/Ubuntu): /var/log/auth.log
+Secure (RHEL/CentOS): /var/log/secure
+</p>
+</div>
+</div>
+<div id="outline-container-org2c1b7c3" class="outline-3">
+<h3 id="org2c1b7c3"><span class="section-number-3">5.4.</span> Kernel Logs</h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+Kern.log: /var/log/kern.log
+dmesg: <code>dmesg</code>
+</p>
+</div>
+</div>
+<div id="outline-container-org59af517" class="outline-3">
+<h3 id="org59af517"><span class="section-number-3">5.5.</span> Application Logs</h3>
+<div class="outline-text-3" id="text-5-5">
+<p>
+Apache log Directory: /var/log/httpd or /var/log/apache
+Apache Access Log: /var/log/apache2/access.log
+Apache Error Log: /var/log/apache2/error.log
+MySQL Log: /var/log/mysql/error.log or /var/log/mysqld.log
+PostgreSQL Log: /var/log/postgresql/postgresql.log
+<code>Application-Specific Logs: Varies by application, often found in /var/log or /var/log/&lt;application-name&gt;.</code>
+</p>
+</div>
+</div>
+<div id="outline-container-orgb61549c" class="outline-3">
+<h3 id="orgb61549c"><span class="section-number-3">5.6.</span> Security Logs</h3>
+<div class="outline-text-3" id="text-5-6">
+<p>
+Audit Log (auditd): /var/log/audit/audit.log
+</p>
+</div>
+</div>
+<div id="outline-container-org70134f8" class="outline-3">
+<h3 id="org70134f8"><span class="section-number-3">5.7.</span> Mail Logs</h3>
+<div class="outline-text-3" id="text-5-7">
+<p>
+Mail.log (Postfix): /var/log/mail.log
+Mail.log (Exim): /var/log/exim4/mainlog
+Mail.log (Sendmail): /var/log/maillog
+</p>
+</div>
+</div>
+<div id="outline-container-org5db84a8" class="outline-3">
+<h3 id="org5db84a8"><span class="section-number-3">5.8.</span> Firewall Logs:</h3>
+<div class="outline-text-3" id="text-5-8">
+<p>
+Firewalld Log: /var/log/firewalld
+UFW Log: /var/log/ufw.log
+iptables Log: /var/log/iptables.log
+</p>
+</div>
+</div>
+<div id="outline-container-org2390bd6" class="outline-3">
+<h3 id="org2390bd6"><span class="section-number-3">5.9.</span> Package Management Logs:</h3>
+<div class="outline-text-3" id="text-5-9">
+<p>
+dpkg.log (Debian/Ubuntu): /var/log/dpkg.log
+yum.log (RHEL/CentOS): /var/log/yum.log
+</p>
+</div>
+</div>
+<div id="outline-container-org14c985c" class="outline-3">
+<h3 id="org14c985c"><span class="section-number-3">5.10.</span> Custom Application Logs:</h3>
+<div class="outline-text-3" id="text-5-10">
+<p>
+Varies by application; check the application's documentation or configuration for log locations.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org82aec5e" class="outline-2">
+<h2 id="org82aec5e"><span class="section-number-2">6.</span> Tmux</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+tmux is a terminal multiplexer for Unix-like operating systems. It allows you to create multiple terminal sessions within a single terminal window or SSH session. With tmux, you can split your terminal into multiple panes, each displaying its own command line interface or running different commands simultaneously. Additionally, tmux supports detachable sessions, which means you can start a session, disconnect from it, and later reattach to the same session, keeping your work intact.
+</p>
+</div>
+<div id="outline-container-org5413362" class="outline-3">
+<h3 id="org5413362"><span class="section-number-3">6.1.</span> Keybinding in Tmux</h3>
+<div class="outline-text-3" id="text-6-1">
+</div>
+<div id="outline-container-org2cc2df1" class="outline-4">
+<h4 id="org2cc2df1"><span class="section-number-4">6.1.1.</span> Prefix Key:</h4>
+<div class="outline-text-4" id="text-6-1-1">
+<p>
+The default prefix key is <code>Ctrl-b</code>. It means you press <code>Ctrl-b</code> first and then another key for a specific action.
+</p>
+</div>
+</div>
+<div id="outline-container-org38d19c1" class="outline-4">
+<h4 id="org38d19c1"><span class="section-number-4">6.1.2.</span> Sessions:</h4>
+<div class="outline-text-4" id="text-6-1-2">
+<p>
+Create a new session: <code>Ctrl-b + :</code>, then type new-session and press Enter.
+Switch between sessions: <code>Ctrl-b + (</code>, then type the session index or use arrow keys.
+Detach from session: <code>Ctrl-b + d</code>.
+List sessions: <code>Ctrl-b + s</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc02ea65" class="outline-4">
+<h4 id="orgc02ea65"><span class="section-number-4">6.1.3.</span> Windows:</h4>
+<div class="outline-text-4" id="text-6-1-3">
+<p>
+Create a new window: <code>Ctrl-b + c</code>.
+Switch between windows: <code>Ctrl-b + 0-9</code> (window index) or Ctrl-b + n (next) or Ctrl-b + p (previous).
+Close the current window: <code>Ctrl-b + &amp;</code>.
+Rename the current window: <code>Ctrl-b + ,</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-org4da6201" class="outline-4">
+<h4 id="org4da6201"><span class="section-number-4">6.1.4.</span> Panes:</h4>
+<div class="outline-text-4" id="text-6-1-4">
+<p>
+Split horizontally: <code>Ctrl-b + %</code>.
+Split vertically: <code>Ctrl-b + "</code>
+Navigate between panes: <code>Ctrl-b + arrow keys</code>.
+Resize panes: <code>Ctrl-b + Alt + arrow keys</code>.
+Zoom into a pane: <code>Ctrl-b + z</code>.
+Close the current pane: <code>Ctrl-b + x</code>.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2024-01-04 Thu</p>
+<p class="author">Author: GCES Linux Community</p>
+<p class="date">Created: 2024-01-04 Thu 19:50</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
